@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HAiAi.AI | High-Impact Solutions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            background-color: #1c1c1c;
+        }
+        .header {
+            background-color: #333;
+            padding: 20px;
+        }
+        .content {
+            padding: 40px;
+        }
+        img.logo {
+            max-width: 300px;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="photo.png" alt="HAiAi.AI Logo" class="logo">
+    </div>
+    <div class="content">
+        <h1>Welcome to HAiAi.AI</h1>
+        <p>High-Impact AI Solutions for Modern Challenges.</p>
+        <p>Discover our innovative approaches and groundbreaking technologies.</p>
+    </div>
+    <footer>
+        <div class="header">
+            <p>&copy; 2023 HAiAi.AI. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
