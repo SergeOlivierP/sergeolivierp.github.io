@@ -25,6 +25,19 @@
             max-width: 300px;
             margin: 0 auto;
         }
+        /* Mugshot styles */
+        .mugshots {
+            display: flex;
+            justify-content: center;
+            gap: 20px; /* space between the images */
+            padding-top: 20px;
+        }
+        .mugshots img {
+            width: 100px; /* width of each mugshot image */
+            height: 150px; /* height of each mugshot image */
+            background: gray; /* placeholder background color */
+            display: inline-block; 
+        }
     </style>
 </head>
 <body>
@@ -35,6 +48,16 @@
         <h1>Welcome to HAiAi.AI</h1>
         <p>High-Impact AI Solutions for Modern Challenges.</p>
         <p>Discover our innovative approaches and groundbreaking technologies.</p>
+        
+        <!-- Mugshots section -->
+        <div class="mugshots">
+            <img src="guillaume.jpg" alt="Guillaume">
+            <img src="maxime.jpg" alt="Maxime">
+            <img src="violette.jpg" alt="Violette">
+            <img src="mahmoud.jpg" alt="Mahmoud">
+            <img src="maxence.jpg" alt="Maxence">
+            <img src="serge.jpg" alt="Serge">
+        </div>
     </div>
     <footer>
         <div class="header">
