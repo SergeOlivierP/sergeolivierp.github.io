@@ -25,18 +25,24 @@
             max-width: 300px;
             margin: 0 auto;
         }
-        /* Mugshot styles */
         .mugshots {
             display: flex;
             justify-content: center;
             gap: 20px; /* space between the images */
             padding-top: 20px;
         }
+        .individual {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .individual span {
+            margin-bottom: 5px; /* space between the name and image */
+        }
         .mugshots img {
-            height: 150px; /* height of each mugshot image */
-            width: auto;   /* width will adjust automatically based on the aspect ratio */
-            background: gray; /* placeholder background color */
-            display: inline-block; 
+            height: 150px; 
+            width: auto;
+            background: gray;
         }
     </style>
 </head>
@@ -48,16 +54,39 @@
         <h1>Welcome to HAiAi.AI</h1>
         <p>High-Impact AI Solutions for Modern Challenges.</p>
         <p>Discover our innovative approaches and groundbreaking technologies.</p>
-        
-        <!-- Mugshots section -->
-        <div class="mugshots">
+
+        <div class="content">
+    <h1>Welcome to HAiAi.AI</h1>
+    <p>High-Impact AI Solutions for Modern Challenges.</p>
+    <p>Discover our innovative approaches and groundbreaking technologies.</p>
+    
+    <!-- Mugshots section -->
+    <div class="mugshots">
+        <div class="individual">
+            <span>Guillaume Rousseau</span>
             <img src="guillaume.png" alt="Guillaume">
+        </div>
+        <div class="individual">
+            <span>Maxime Vigeant</span>
             <img src="maxime.png" alt="Maxime">
+        </div>
+        <div class="individual">
+            <span>Violette Berge</span>
             <img src="violette.png" alt="Violette">
+        </div>
+        <div class="individual">
+            <span>Mahmoud Ashour</span>
             <img src="mahmoud.png" alt="Mahmoud">
+        </div>
+        <div class="individual">
+            <spanMaxence Jutras</span>
             <img src="maxence.png" alt="Maxence">
+        </div>
+        <div class="individual">
+            <span>Serge-Olivier Paquette</span>
             <img src="serge.png" alt="Serge">
         </div>
+    </div>
     </div>
     <footer>
         <div class="header">
