@@ -27,6 +27,7 @@
         }
         .mugshots {
             display: flex;
+            flex-wrap: wrap;
             justify-content: center;
             gap: 20px; /* space between the images */
             padding-top: 20px;
@@ -35,6 +36,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            margin: 10px;
         }
         .individual span {
             margin-bottom: 5px; /* space between the name and image */
@@ -43,6 +45,12 @@
             height: 150px; 
             width: auto;
             background: gray;
+        }
+            /* Media Query for smaller screens */
+        @media (max-width: 600px) {
+            .mugshots img {
+                height: 100px;
+            }
         }
     </style>
 </head>
