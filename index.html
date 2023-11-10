@@ -143,6 +143,16 @@
                 let task = document.createElement("div");
                 task.className = "task";
                 task.textContent = taskText;
+        
+                // Create a delete button for each task
+                let deleteButton = document.createElement("button");
+                deleteButton.textContent = "Delete";
+                deleteButton.onclick = function() {
+                    task.remove();
+                };
+        
+                task.appendChild(deleteButton); // Add the delete button to the task
+        
                 task.draggable = true;
                 task.addEventListener('dragstart', dragStart);
                 document.getElementById(column + "Tasks").appendChild(task);
