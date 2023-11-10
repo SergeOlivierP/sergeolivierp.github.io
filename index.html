@@ -141,55 +141,66 @@
     </footer>
     <script>
         function addTask(column) {
-            let taskText = prompt("Enter the task:");
-            if (taskText) {
-                let task = document.createElement("div");
-                task.className = "task";
-                task.style.display = "flex";
-                task.style.justifyContent = "space-between";
-                task.style.alignItems = "center";
-        
-                let taskContent = document.createElement("span");
-                taskContent.textContent = taskText;
-                task.appendChild(taskContent);
-        
-                let deleteButton = document.createElement("button");
-                deleteButton.textContent = "Delete";
-                deleteButton.style.marginLeft = "10px";
-                deleteButton.onclick = function() {
-                    task.remove();
-                };
-        
-                task.appendChild(deleteButton);
-        
-                task.draggable = true;
-                task.addEventListener('dragstart', dragStart);
-                document.getElementById(column + "Tasks").appendChild(task);
-            }
-        }
+    let taskText = prompt("Enter the task:");
+    if (taskText) {
+        let task = document.createElement("div");
+        task.className = "task";
+        task.style.display = "flex";
+        task.style.justifyContent = "space-between";
+        task.style.alignItems = "center";
 
-        function dragStart(e) {
-            e.dataTransfer.setData("text/plain", e.target.id);
-            e.dropEffect = "move";
+        let taskContent = document.createElement("span");
+        taskContent.textContent = taskText;
+        task.appendChild(taskContent);
+
+        let deleteButton = document.createElement("button");
+        deleteButton.textContent = "Delete";
+        deleteButton.style.marginLeft = "10px";
+        deleteButton.onclick = function() {
+            task.remove();
+        };
+
+        task.appendChild(deleteButton);
+
+        task.draggable = true;
+        task.addEventListener('dragstart', dragStart);
+        document.getElementById(column + "Tasks").appendChild(task);
         }
-        
-        document.querySelectorAll('.tasks').forEach(column => {
-            column.addEventListener('dragover', dragOver);
-            column.addEventListener('drop', drop);
-        });
-        
-        function dragOver(e) {
-            e.preventDefault();
+    }
+    
+    function dragStart(e) {
+        e.dataTransfer.setData("text", e.target.id);
+        e.dataTransfer.setData("parentColumnId", e.target.parentNode.id);
+    }
+    
+    document.querySelectorAll('.tasks').forEach(column => {
+        column.addEventListener('dragover', dragOver);
+        column.addEventListener('drop', drop);
+    });
+    
+    function dragOver(e) {
+        e.preventDefault();
+    }
+    
+    function drop(e) {
+        e.preventDefault();
+        const task = document.getElementById(e.dataTransfer.getData("text"));
+        const fromColumn = e.dataTransfer.getData("parentColumnId");
+        const toColumn = e.target.id;
+    
+        if (task && e.target.className === "tasks" && isMoveAllowed(fromColumn, toColumn)) {
+            e.target.appendChild(task);
         }
-        
-        function drop(e) {
-            e.preventDefault();
-            const data = e.dataTransfer.getData("text/plain");
-            const task = document.getElementById(data);
-            if (task && e.target.className === "tasks") {
-                e.target.appendChild(task);
-            }
-        }
+    }
+    
+    function isMoveAllowed(fromColumn, toColumn) {
+        const allowedMoves = {
+            "todoTasks": ["inProgressTasks"],
+            "inProgressTasks": ["doneTasks"]
+        };
+    
+        return allowedMoves[fromColumn] && allowedMoves[fromColumn].includes(toColumn);
+    }
     </script>
 </body>
 </html>
