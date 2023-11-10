@@ -153,20 +153,36 @@
         taskContent.textContent = taskText;
         task.appendChild(taskContent);
 
+        // Move button
+        let moveButton = document.createElement("button");
+        moveButton.textContent = "Move";
+        moveButton.onclick = function() {
+            moveTask(task, column);
+        };
+        task.appendChild(moveButton);
+
+        // Delete button
         let deleteButton = document.createElement("button");
         deleteButton.textContent = "Delete";
-        deleteButton.style.marginLeft = "10px";
         deleteButton.onclick = function() {
             task.remove();
         };
-
         task.appendChild(deleteButton);
 
-        task.draggable = true;
-        task.addEventListener('dragstart', dragStart);
         document.getElementById(column + "Tasks").appendChild(task);
-        }
     }
+}
+
+function moveTask(task, currentColumn) {
+    const nextColumnMap = {
+        'todo': 'inProgressTasks',
+        'inProgress': 'doneTasks'
+    };
+    const nextColumn = nextColumnMap[currentColumn];
+    if (nextColumn) {
+        document.getElementById(nextColumn).appendChild(task);
+    }
+}
     
     function dragStart(e) {
         e.dataTransfer.setData("text", e.target.id);
