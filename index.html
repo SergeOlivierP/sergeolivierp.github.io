@@ -142,7 +142,7 @@
         </div>
     </footer>
     <script>
-        function addTask(column) {
+    function addTask(column) {
     let taskText = prompt("Enter the task:");
     if (taskText) {
         let task = document.createElement("div");
@@ -252,7 +252,7 @@ function moveTask(task, currentColumn) {
             ["todoTasks", "inProgressTasks", "doneTasks"].forEach(column => {
                 document.getElementById(column).innerHTML = ''; // Clear current tasks
                 kanbanData[column].forEach(taskText => {
-                    const task = createTaskElement(taskText, column.replace("Tasks", ""));
+                    const task = addTask(taskText, column.replace("Tasks", ""));
                     document.getElementById(column).appendChild(task);
                 });
             });
@@ -260,11 +260,6 @@ function moveTask(task, currentColumn) {
     
         reader.readAsText(file);
     }
-
-function createTaskElement(taskText, column) {
-    // Reuse the task creation logic from addTask function
-    // Return the created task element
-}
     </script>
 </body>
 </html>
