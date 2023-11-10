@@ -46,6 +46,30 @@
             width: auto;
             background: gray;
         }
+                #kanbanBoard {
+            display: flex;
+            justify-content: space-around;
+            padding: 10px;
+        }
+        .column {
+            flex-grow: 1;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px;
+            background-color: white;
+            color: black;
+        }
+        .tasks {
+            min-height: 200px;
+        }
+        .task {
+            background-color: #f0f0f0;
+            border: 1px solid #ddd;
+            border-radius: 3px;
+            padding: 5px 10px;
+            margin-bottom: 10px;
+        }
             /* Media Query for smaller screens */
         @media (max-width: 600px) {
             .mugshots img {
@@ -62,7 +86,23 @@
     <h1>Welcome to HAiAi.AI</h1>
     <p>High-Impact AI Solutions for Modern Challenges.</p>
     <p>Discover our innovative approaches and groundbreaking technologies.</p>
-    
+        <div id="kanbanBoard">
+            <div class="column" id="todo">
+                <h2>To Do</h2>
+                <div class="tasks" id="todoTasks"></div>
+                <button onclick="addTask('todo')">Add Task</button>
+            </div>
+            <div class="column" id="inProgress">
+                <h2>In Progress</h2>
+                <div class="tasks" id="inProgressTasks"></div>
+                <button onclick="addTask('inProgress')">Add Task</button>
+            </div>
+            <div class="column" id="done">
+                <h2>Done</h2>
+                <div class="tasks" id="doneTasks"></div>
+                <button onclick="addTask('done')">Add Task</button>
+            </div>
+        </div>
     <!-- Mugshots section -->
     <div class="mugshots">
         <div class="individual">
