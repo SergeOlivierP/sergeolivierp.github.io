@@ -64,11 +64,14 @@
             min-height: 200px;
         }
         .task {
-            background-color: #f0f0f0;
-            border: 1px solid #ddd;
-            border-radius: 3px;
-            padding: 5px 10px;
-            margin-bottom: 10px;
+        background-color: #f0f0f0;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        padding: 5px 10px;
+        margin-bottom: 10px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         }
             /* Media Query for smaller screens */
         @media (max-width: 600px) {
@@ -142,16 +145,22 @@
             if (taskText) {
                 let task = document.createElement("div");
                 task.className = "task";
-                task.textContent = taskText;
+                task.style.display = "flex";
+                task.style.justifyContent = "space-between";
+                task.style.alignItems = "center";
         
-                // Create a delete button for each task
+                let taskContent = document.createElement("span");
+                taskContent.textContent = taskText;
+                task.appendChild(taskContent);
+        
                 let deleteButton = document.createElement("button");
                 deleteButton.textContent = "Delete";
+                deleteButton.style.marginLeft = "10px";
                 deleteButton.onclick = function() {
                     task.remove();
                 };
         
-                task.appendChild(deleteButton); // Add the delete button to the task
+                task.appendChild(deleteButton);
         
                 task.draggable = true;
                 task.addEventListener('dragstart', dragStart);
