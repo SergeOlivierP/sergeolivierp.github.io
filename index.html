@@ -90,6 +90,8 @@
     <p>High-Impact AI Solutions for Modern Challenges.</p>
     <p>Discover our innovative approaches and groundbreaking technologies.</p>
         <div id="kanbanBoard">
+            <button onclick="exportKanban()">Export Kanban</button>
+            <input type="file" id="fileInput" onchange="importKanban()">
             <div class="column" id="todo">
                 <h2>To Do</h2>
                 <div class="tasks" id="todoTasks"></div>
@@ -217,6 +219,52 @@ function moveTask(task, currentColumn) {
     
         return allowedMoves[fromColumn] && allowedMoves[fromColumn].includes(toColumn);
     }
+    
+    function exportKanban() {
+        const columns = ["todoTasks", "inProgressTasks", "doneTasks"];
+        let kanbanData = {};
+    
+        columns.forEach(column => {
+            let tasks = [];
+            document.getElementById(column).childNodes.forEach(task => {
+                if (task.className === "task") {
+                    tasks.push(task.innerText.replace("MoveDelete", "").trim());
+                }
+            });
+            kanbanData[column] = tasks;
+        });
+    
+        const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(kanbanData));
+        const downloadAnchorNode = document.createElement('a');
+        downloadAnchorNode.setAttribute("href", dataStr);
+        downloadAnchorNode.setAttribute("download", "kanban_board.json");
+        document.body.appendChild(downloadAnchorNode); // required for firefox
+        downloadAnchorNode.click();
+        downloadAnchorNode.remove();
+        }
+    function importKanban() {
+        const input = document.getElementById('fileInput');
+        const file = input.files[0];
+        const reader = new FileReader();
+    
+        reader.onload = function(e) {
+            const kanbanData = JSON.parse(e.target.result);
+            ["todoTasks", "inProgressTasks", "doneTasks"].forEach(column => {
+                document.getElementById(column).innerHTML = ''; // Clear current tasks
+                kanbanData[column].forEach(taskText => {
+                    const task = createTaskElement(taskText, column.replace("Tasks", ""));
+                    document.getElementById(column).appendChild(task);
+                });
+            });
+        };
+    
+        reader.readAsText(file);
+    }
+
+function createTaskElement(taskText, column) {
+    // Reuse the task creation logic from addTask function
+    // Return the created task element
+}
     </script>
 </body>
 </html>
