@@ -109,6 +109,7 @@
     </div>
         <div class="content">
     <h1>Bienvenu chez HAiAi.AI</h1>
+    <button onclick="loadRandomHeader()">Motive Moi!</button>
     <p> Solutions à impact pour défis modernes (Défi HEC).</p>
     <p>Découvrez notre approche innovante à des problèmes très sérieux.</p>
             <button onclick="exportKanban()">Export Kanban</button>
@@ -279,6 +280,15 @@ function moveTask(task, currentColumn) {
                 });
             };
             reader.readAsText(file);
+        }
+        function loadRandomHeader() {
+            fetch('headers.json')
+                .then(response => response.json())
+                .then(headers => {
+                    const randomHeader = headers[Math.floor(Math.random() * headers.length)];
+                    alert(randomHeader); // or display it in some other way
+                })
+                .catch(error => console.error('Error loading headers:', error));
         }
     </script>
 </body>
