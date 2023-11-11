@@ -142,7 +142,9 @@
         </div>
     </footer>
     <script>
-    function addTask(column) {
+    function addTask(column, taskText = null) {
+    let taskContentText = taskText || prompt("Enter the task:");
+    if (taskContentText) {    
     let taskText = prompt("Enter the task:");
     if (taskText) {
         let task = document.createElement("div");
@@ -152,8 +154,9 @@
         task.style.alignItems = "center";
 
         let taskContent = document.createElement("span");
-        taskContent.textContent = taskText;
+        taskContent.textContent = taskContentText;
         task.appendChild(taskContent);
+
 
         // Move button
         let moveButton = document.createElement("button");
@@ -242,24 +245,22 @@ function moveTask(task, currentColumn) {
         downloadAnchorNode.click();
         downloadAnchorNode.remove();
         }
-    function importKanban() {
-        const input = document.getElementById('fileInput');
-        const file = input.files[0];
-        const reader = new FileReader();
-    
-        reader.onload = function(e) {
-            const kanbanData = JSON.parse(e.target.result);
-            ["todoTasks", "inProgressTasks", "doneTasks"].forEach(column => {
-                document.getElementById(column).innerHTML = ''; // Clear current tasks
-                kanbanData[column].forEach(taskText => {
-                    const task = addTask(taskText, column.replace("Tasks", ""));
-                    document.getElementById(column).appendChild(task);
+        function importKanban() {
+            const input = document.getElementById('fileInput');
+            const file = input.files[0];
+            const reader = new FileReader();
+        
+            reader.onload = function(e) {
+                const kanbanData = JSON.parse(e.target.result);
+                ["todoTasks", "inProgressTasks", "doneTasks"].forEach(column => {
+                    document.getElementById(column).innerHTML = ''; // Clear current tasks
+                    kanbanData[column].forEach(taskText => {
+                        addTask(column.replace("Tasks", ""), taskText);
+                    });
                 });
-            });
-        };
-    
-        reader.readAsText(file);
-    }
+            };
+            reader.readAsText(file);
+        }
     </script>
 </body>
 </html>
