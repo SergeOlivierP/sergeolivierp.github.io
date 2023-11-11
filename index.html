@@ -106,6 +106,7 @@
 <body>
     <div class="header">
         <img src="logo.png" alt="HAiAi.AI Logo" class="logo">
+        <div id="countdown" style="font-size: 2em; margin-top: 20px;"></div>
     </div>
         <div class="content">
     <h1>Bienvenu chez HAiAi.AI</h1>
@@ -290,6 +291,24 @@ function moveTask(task, currentColumn) {
                 })
                 .catch(error => console.error('Error loading headers:', error));
         }
+        function updateCountdown() {
+        const now = new Date();
+        const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+        const diff = midnight - now;
+        
+        if (diff <= 0) {
+            document.getElementById("countdown").innerHTML = "00:00:00";
+            return;
+        }
+        
+        const hours = String(Math.floor(diff / 3600000)).padStart(2, '0');
+        const minutes = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+        const seconds = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+        
+        document.getElementById("countdown").innerHTML = `${hours}:${minutes}:${seconds}`;
+        }
+
+setInterval(updateCountdown, 1000);
     </script>
 </body>
 </html>
