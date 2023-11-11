@@ -144,9 +144,7 @@
     <script>
     function addTask(column, taskText = null) {
     let taskContentText = taskText || prompt("Enter the task:");
-    if (taskContentText) {    
-    let taskText = prompt("Enter the task:");
-    if (taskText) {
+    if (taskContentText) {
         let task = document.createElement("div");
         task.className = "task";
         task.style.display = "flex";
@@ -156,7 +154,6 @@
         let taskContent = document.createElement("span");
         taskContent.textContent = taskContentText;
         task.appendChild(taskContent);
-
 
         // Move button
         let moveButton = document.createElement("button");
