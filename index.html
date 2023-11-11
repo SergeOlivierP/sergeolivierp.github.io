@@ -86,9 +86,9 @@
         <img src="logo.png" alt="HAiAi.AI Logo" class="logo">
     </div>
         <div class="content">
-    <h1>Welcome to HAiAi.AI</h1>
+    <h1>Bienvenu chez HAiAi.AI</h1>
     <p>High-Impact AI Solutions for Modern Challenges (Défi HEC).</p>
-    <p>Discover our innovative approaches and groundbreaking technologies.</p>
+    <p>Découvrez notre approche innovate à des problèmes très sérieux.</p>
             <button onclick="exportKanban()">Export Kanban</button>
             <input type="file" id="fileInput" onchange="importKanban()">
         <div id="kanbanBoard">
@@ -143,7 +143,7 @@
     </footer>
     <script>
     function addTask(column, taskText = null) {
-    let taskContentText = taskText || prompt("Enter the task:");
+    let taskContentText = taskText || prompt("Entrez la tâche:");
     if (taskContentText) {
         let task = document.createElement("div");
         task.className = "task";
@@ -157,7 +157,7 @@
 
         // Move button
         let moveButton = document.createElement("button");
-        moveButton.textContent = "Move";
+        moveButton.textContent = "Awaye à droite!";
         moveButton.onclick = function() {
             moveTask(task, column);
         };
@@ -165,7 +165,7 @@
 
         // Delete button
         let deleteButton = document.createElement("button");
-        deleteButton.textContent = "Delete";
+        deleteButton.textContent = "À la scrap";
         deleteButton.onclick = function() {
             task.remove();
         };
