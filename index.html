@@ -306,20 +306,23 @@ function moveTask(task, currentColumn) {
                 .catch(error => console.error('Error loading headers:', error));
         }
         function updateCountdown() {
-        const now = new Date();
-        const midnight = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
-        const diff = midnight - now;
+            const now = new Date();
+            // Set the target date and time to November 17, 2023, 23:55
+            const targetDate = new Date('2023-11-17T23:55:00');
         
-        if (diff <= 0) {
-            document.getElementById("countdown").innerHTML = "00:00:00";
-            return;
-        }
-        
-        const hours = String(Math.floor(diff / 3600000)).padStart(2, '0');
-        const minutes = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-        const seconds = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-        
-        document.getElementById("countdown").innerHTML = `${hours}:${minutes}:${seconds}`;
+            // Calculate the difference in milliseconds between the target date and now
+            const diff = targetDate - now;
+            
+            if (diff <= 0) {
+                document.getElementById("countdown").innerHTML = "00:00:00";
+                return;
+            }
+            
+            const hours = String(Math.floor(diff / 3600000)).padStart(2, '0');
+            const minutes = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+            const seconds = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+            
+            document.getElementById("countdown").innerHTML = `${hours}:${minutes}:${seconds}`;
         }
 
 setInterval(updateCountdown, 1000);
