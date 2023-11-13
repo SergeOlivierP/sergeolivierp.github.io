@@ -127,6 +127,29 @@ Notre expertise en intelligence artificielle, combinée à notre acuité straté
 
 En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé à catalyser votre succès grâce à une approche consultative de classe mondiale et des solutions révolutionnaires.
 </p>
+
+            <div class="game-section">
+    <h2>C'est quoi les odds</h2>
+    <p>"C'est quoi les odds" est un jeu amusant et stimulant, joué entre amis, qui consiste à se lancer des défis. Un joueur propose un défi, puis les deux joueurs choisissent secrètement un nombre. Si les nombres sont identiques, le défi doit être réalisé.</p>
+    <div id="challengeInputSection">
+        <input type="text" id="challengeInput" placeholder="Entrez un défi">
+        <button onclick="setChallenge()">Définir le défi</button>
+    </div>
+    <div id="oddsInputSection" style="display:none;">
+        <input type="number" id="oddsInput" min="1" max="100" placeholder="Entrez les Odds (1-100)">
+        <button onclick="setOdds()">Définir les odds</button>
+    </div>
+    <div id="playerOneGuessSection" style="display:none;">
+        <input type="number" id="playerOneGuess" placeholder="Guess du Joueur 1">
+        <button onclick="submitPlayerOneGuess()">Soumettre le guess</button>
+    </div>
+    <div id="playerTwoGuessSection" style="display:none;">
+        <input type="number" id="playerTwoGuess" placeholder="Guess du Joueur 2">
+        <button onclick="compareGuesses()">Soumettre le guess</button>
+    </div>
+    <div id="resultDisplay" style="display:none;"></div>
+</div>
+            
             <button onclick="exportKanban()">Export Kanban</button>
             <input type="file" id="fileInput" onchange="importKanban()">
         <div id="kanbanBoard">
@@ -146,26 +169,7 @@ En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé
                 <button onclick="addTask('done')">Ajouter</button>
             </div>
         </div>
-        <div class="game-section">
-        <h2>C'est quoi les odds</h2>
-        <div id="challengeInputSection">
-            <input type="text" id="challengeInput" placeholder="Enter a challenge">
-            <button onclick="setChallenge()">Set Challenge</button>
-        </div>
-        <div id="oddsInputSection" style="display:none;">
-            <input type="number" id="oddsInput" min="1" max="100" placeholder="Enter Odds (1-100)">
-            <button onclick="setOdds()">Set Odds</button>
-        </div>
-        <div id="playerOneGuessSection" style="display:none;">
-            <input type="number" id="playerOneGuess" placeholder="Player 1 Guess">
-            <button onclick="submitPlayerOneGuess()">Submit Guess</button>
-        </div>
-        <div id="playerTwoGuessSection" style="display:none;">
-            <input type="number" id="playerTwoGuess" placeholder="Player 2 Guess">
-            <button onclick="compareGuesses()">Submit Guess</button>
-        </div>
-        <div id="resultDisplay" style="display:none;"></div>
-        </div>
+        
     <!-- Mugshots section -->
     <div class="mugshots">
         <div class="individual">
@@ -364,7 +368,7 @@ function moveTask(task, currentColumn) {
     function submitPlayerOneGuess() {
         playerOneGuess = parseInt(document.getElementById('playerOneGuess').value);
         if (playerOneGuess < 0 || playerOneGuess > odds) {
-            alert(`Please enter a number between 0 and ${odds}`);
+            alert(`Le nombre doit être entre 0 et ${odds}`);
             return;
         }
         document.getElementById('playerOneGuessSection').style.display = 'none';
@@ -374,15 +378,15 @@ function moveTask(task, currentColumn) {
     function compareGuesses() {
         const playerTwoGuess = parseInt(document.getElementById('playerTwoGuess').value);
         if (playerTwoGuess < 0 || playerTwoGuess > odds) {
-            alert(`Please enter a number between 0 and ${odds}`);
+            alert(`Le nombre doit être entre 0 et ${odds}`);
             return;
         }
 
         let result = '';
         if (playerOneGuess === playerTwoGuess) {
-            result = `Both players guessed ${playerOneGuess}. Player 1 must do the challenge: ${challenge}`;
+            result = `Les deux joueurs ont entré ${playerOneGuess}. Le joueur 1 doit réalisé le défi: ${challenge}`;
         } else {
-            result = `Player 1 guessed ${playerOneGuess} and Player 2 guessed ${playerTwoGuess}. No challenge this time.`;
+            result = `Le Jouer 1 a entré ${playerOneGuess} et le joueur 2 a entré ${playerTwoGuess}. Pas de défi cette fois.`;
         }
 
         document.getElementById('playerTwoGuessSection').style.display = 'none';
