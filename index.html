@@ -146,6 +146,23 @@ En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé
                 <button onclick="addTask('done')">Ajouter</button>
             </div>
         </div>
+        <div class="game-section">
+        <h2>C'est quoi les odds</h2>
+        <div id="challengeInputSection">
+            <input type="text" id="challengeInput" placeholder="Enter a challenge">
+            <button onclick="setChallenge()">Set Challenge</button>
+        </div>
+        <div id="oddsInputSection" style="display:none;">
+            <input type="number" id="oddsInput" min="1" max="100" placeholder="Enter Odds (1-100)">
+            <button onclick="setOdds()">Set Odds</button>
+        </div>
+        <div id="numberGuessSection" style="display:none;">
+            <input type="number" id="playerOneGuess" placeholder="Player 1 Guess">
+            <input type="number" id="playerTwoGuess" placeholder="Player 2 Guess">
+            <button onclick="compareGuesses()">Compare Guesses</button>
+        </div>
+        <div id="resultDisplay" style="display:none;"></div>
+        </div>
     <!-- Mugshots section -->
     <div class="mugshots">
         <div class="individual">
@@ -323,6 +340,37 @@ function moveTask(task, currentColumn) {
             const seconds = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
             
             document.getElementById("countdown").innerHTML = `${hours}:${minutes}:${seconds}`;
+        }
+        
+        let challenge = '';
+        let odds = 0;
+
+        function setChallenge() {
+            challenge = document.getElementById('challengeInput').value;
+            document.getElementById('challengeInputSection').style.display = 'none';
+            document.getElementById('oddsInputSection').style.display = 'block';
+        }
+
+        function setOdds() {
+            odds = parseInt(document.getElementById('oddsInput').value);
+            document.getElementById('oddsInputSection').style.display = 'none';
+            document.getElementById('numberGuessSection').style.display = 'block';
+        }
+
+        function compareGuesses() {
+            const playerOneGuess = parseInt(document.getElementById('playerOneGuess').value);
+            const playerTwoGuess = parseInt(document.getElementById('playerTwoGuess').value);
+
+            let result = '';
+            if (playerOneGuess === playerTwoGuess) {
+                result = `Both players guessed ${playerOneGuess}. Player 1 must do the challenge: ${challenge}`;
+            } else {
+                result = `Player 1 guessed ${playerOneGuess} and Player 2 guessed ${playerTwoGuess}. No challenge this time.`;
+            }
+
+            document.getElementById('numberGuessSection').style.display = 'none';
+            document.getElementById('resultDisplay').style.display = 'block';
+            document.getElementById('resultDisplay').innerText = result;
         }
 
 setInterval(updateCountdown, 1000);
