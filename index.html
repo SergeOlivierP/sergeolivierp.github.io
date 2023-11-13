@@ -356,31 +356,39 @@ function moveTask(task, currentColumn) {
         }
 
         function setOdds() {
-            odds = parseInt(document.getElementById('oddsInput').value);
-            document.getElementById('oddsInputSection').style.display = 'none';
-            document.getElementById('playerOneGuessSection').style.display = 'block';
+        odds = parseInt(document.getElementById('oddsInput').value);
+        document.getElementById('oddsInputSection').style.display = 'none';
+        document.getElementById('playerOneGuessSection').style.display = 'block';
+    }
+
+    function submitPlayerOneGuess() {
+        playerOneGuess = parseInt(document.getElementById('playerOneGuess').value);
+        if (playerOneGuess < 0 || playerOneGuess > odds) {
+            alert(`Please enter a number between 0 and ${odds}`);
+            return;
+        }
+        document.getElementById('playerOneGuessSection').style.display = 'none';
+        document.getElementById('playerTwoGuessSection').style.display = 'block';
+    }
+
+    function compareGuesses() {
+        const playerTwoGuess = parseInt(document.getElementById('playerTwoGuess').value);
+        if (playerTwoGuess < 0 || playerTwoGuess > odds) {
+            alert(`Please enter a number between 0 and ${odds}`);
+            return;
         }
 
-        function submitPlayerOneGuess() {
-            playerOneGuess = parseInt(document.getElementById('playerOneGuess').value);
-            document.getElementById('playerOneGuessSection').style.display = 'none';
-            document.getElementById('playerTwoGuessSection').style.display = 'block';
+        let result = '';
+        if (playerOneGuess === playerTwoGuess) {
+            result = `Both players guessed ${playerOneGuess}. Player 1 must do the challenge: ${challenge}`;
+        } else {
+            result = `Player 1 guessed ${playerOneGuess} and Player 2 guessed ${playerTwoGuess}. No challenge this time.`;
         }
 
-        function compareGuesses() {
-            const playerTwoGuess = parseInt(document.getElementById('playerTwoGuess').value);
-
-            let result = '';
-            if (playerOneGuess === playerTwoGuess) {
-                result = `Both players guessed ${playerOneGuess}. Player 1 must do the challenge: ${challenge}`;
-            } else {
-                result = `Player 1 guessed ${playerOneGuess} and Player 2 guessed ${playerTwoGuess}. No challenge this time.`;
-            }
-
-            document.getElementById('playerTwoGuessSection').style.display = 'none';
-            document.getElementById('resultDisplay').style.display = 'block';
-            document.getElementById('resultDisplay').innerText = result;
-        }
+        document.getElementById('playerTwoGuessSection').style.display = 'none';
+        document.getElementById('resultDisplay').style.display = 'block';
+        document.getElementById('resultDisplay').innerText = result;
+    }
 
 setInterval(updateCountdown, 1000);
     </script>
