@@ -156,10 +156,13 @@ En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé
             <input type="number" id="oddsInput" min="1" max="100" placeholder="Enter Odds (1-100)">
             <button onclick="setOdds()">Set Odds</button>
         </div>
-        <div id="numberGuessSection" style="display:none;">
+        <div id="playerOneGuessSection" style="display:none;">
             <input type="number" id="playerOneGuess" placeholder="Player 1 Guess">
+            <button onclick="submitPlayerOneGuess()">Submit Guess</button>
+        </div>
+        <div id="playerTwoGuessSection" style="display:none;">
             <input type="number" id="playerTwoGuess" placeholder="Player 2 Guess">
-            <button onclick="compareGuesses()">Compare Guesses</button>
+            <button onclick="compareGuesses()">Submit Guess</button>
         </div>
         <div id="resultDisplay" style="display:none;"></div>
         </div>
@@ -344,6 +347,7 @@ function moveTask(task, currentColumn) {
         
         let challenge = '';
         let odds = 0;
+        let playerOneGuess = 0;
 
         function setChallenge() {
             challenge = document.getElementById('challengeInput').value;
@@ -354,11 +358,16 @@ function moveTask(task, currentColumn) {
         function setOdds() {
             odds = parseInt(document.getElementById('oddsInput').value);
             document.getElementById('oddsInputSection').style.display = 'none';
-            document.getElementById('numberGuessSection').style.display = 'block';
+            document.getElementById('playerOneGuessSection').style.display = 'block';
+        }
+
+        function submitPlayerOneGuess() {
+            playerOneGuess = parseInt(document.getElementById('playerOneGuess').value);
+            document.getElementById('playerOneGuessSection').style.display = 'none';
+            document.getElementById('playerTwoGuessSection').style.display = 'block';
         }
 
         function compareGuesses() {
-            const playerOneGuess = parseInt(document.getElementById('playerOneGuess').value);
             const playerTwoGuess = parseInt(document.getElementById('playerTwoGuess').value);
 
             let result = '';
@@ -368,7 +377,7 @@ function moveTask(task, currentColumn) {
                 result = `Player 1 guessed ${playerOneGuess} and Player 2 guessed ${playerTwoGuess}. No challenge this time.`;
             }
 
-            document.getElementById('numberGuessSection').style.display = 'none';
+            document.getElementById('playerTwoGuessSection').style.display = 'none';
             document.getElementById('resultDisplay').style.display = 'block';
             document.getElementById('resultDisplay').innerText = result;
         }
