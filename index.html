@@ -149,7 +149,11 @@ Notre expertise en intelligence artificielle, combinée à notre acuité straté
 
 En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé à catalyser votre succès grâce à une approche consultative de classe mondiale et des solutions révolutionnaires.
 </p>
-
+            <div class="gameArea">
+                <h2>Carré de sable</h2>
+                <canvas id="gameCanvas" width="500" height="500"></canvas>
+                <script src="game.js"></script>
+            </div>
     <div class="game-section">
     <h2>C'est quoi les odds</h2>
     <p>"C'est quoi les odds" est un jeu amusant et stimulant, joué entre collègues pour résoudre des disputes ou des arguments, qui consiste à se lancer des défis. Un joueur propose un défi et demande à l'autre "C'est quoi les Odds?". Le deuxième joueur dit un nombre entre 0 et 100 appelé "Les Odds", puis les deux joueurs choisissent secrètement un nombre entre 0 et les Odds. Si les nombres sont identiques, le défi doit être réalisé.</p>
@@ -171,11 +175,6 @@ En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé
     </div>
     <div id="resultDisplay" style="display:none;"></div>
 </div>
-                <div class="gameArea">
-                <h2>Carré de sable</h2>
-                <canvas id="gameCanvas" width="500" height="500"></canvas>
-                <script src="game.js"></script>
-                </div>
             
             <button onclick="exportKanban()">Export Kanban</button>
             <input type="file" id="fileInput" onchange="importKanban()">
