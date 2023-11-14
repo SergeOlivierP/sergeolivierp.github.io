@@ -83,6 +83,12 @@
         justify-content: space-between;
         align-items: center;
         }
+        .gameArea {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            border: 2px solid black;
+        }
             /* Media Query for smaller screens */
         /* Media Query for smaller screens */
         @media (max-width: 600px) {
@@ -155,6 +161,14 @@ En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé
     </div>
     <div id="resultDisplay" style="display:none;"></div>
 </div>
+            <h2>Carré de sable</h2e>
+    <link rel="stylesheet" type="text/css" href="style.css">
+        <div id="gameArea">
+        <div id="square"></div>
+        <div id="circle"></div>
+    </div>
+    <script src="game.js"></script>
+
             
             <button onclick="exportKanban()">Export Kanban</button>
             <input type="file" id="fileInput" onchange="importKanban()">
