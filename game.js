@@ -71,7 +71,11 @@ function onMouseUp(e) {
     document.removeEventListener('mouseup', onMouseUp);
 
     if (isInsideSmallSquare(circleX, circleY)) {
-        placeCircle();
+        drawSquares(); // Clear and redraw squares
+        placeCircle(); // Place a new circle
+    } else {
+        drawSquares(); // Clear and redraw squares
+        drawCircle();  // Redraw the circle at its current position
     }
 }
 
