@@ -83,21 +83,22 @@
         justify-content: space-between;
         align-items: center;
         }
+        .gameArea {
+            width: 540px; /* Adjusted to account for padding and border */
+            height: 540px; /* Adjusted to account for padding and border */
+            margin: 20px auto; /* Center the game area */
+            padding: 10px;
+            border-radius: 10px;
+            background-color: #007bff; /* Blue background */
+            box-sizing: border-box; /* Ensures padding and border are included in width/height */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
         .gameArea canvas {
             border: 5px solid #8c6d46; /* Darker sand-like border */
             background-color: #f4f1de; /* Light sand-like background for canvas */
-            display: block; /* Ensures the canvas is block-level */
-            margin: 0 auto; /* Centers the canvas in the .gameArea */
-        }
-        
-        /* Ensure the game area doesn't conflict with other styles */
-        .gameArea {
-            width: 500px; /* or any size that fits your design */
-            height: 500px;
-            margin: 20px auto; /* Center the game area */
-            padding: 10px;
-            border-radius: 10px; /* Optional, for consistency with your design */
-            background-color: #007bff; /* Optional, to match the game section */
         }
             /* Media Query for smaller screens */
         /* Media Query for smaller screens */
