@@ -10,7 +10,19 @@ let circleX, circleY;
 function drawSquares() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
+    // Define sand color
+    const sandColor = '#c2b280'; // A sand-like color, you can adjust it as needed
+
     // Draw large square
+    ctx.fillStyle = sandColor;
+    ctx.fillRect(
+        (canvas.width - largeSquareSize) / 2,
+        (canvas.height - largeSquareSize) / 2,
+        largeSquareSize,
+        largeSquareSize
+    );
+
+    // Draw border for large square
     ctx.strokeRect(
         (canvas.width - largeSquareSize) / 2,
         (canvas.height - largeSquareSize) / 2,
@@ -19,6 +31,15 @@ function drawSquares() {
     );
 
     // Draw small square
+    ctx.fillStyle = sandColor;
+    ctx.fillRect(
+        (canvas.width - smallSquareSize) / 2,
+        (canvas.height - smallSquareSize) / 2,
+        smallSquareSize,
+        smallSquareSize
+    );
+
+    // Draw border for small square
     ctx.strokeRect(
         (canvas.width - smallSquareSize) / 2,
         (canvas.height - smallSquareSize) / 2,
