@@ -17,22 +17,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Function to keep the circle within the game area
-    function keepCircleInBounds(circle, gameArea) {
-        const circleRect = circle.getBoundingClientRect();
+    function keepCircleInBounds(circle, gameArea, pageX, pageY, shiftX, shiftY) {
         const gameAreaRect = gameArea.getBoundingClientRect();
 
-        if (circleRect.top < gameAreaRect.top) {
-            circle.style.top = '0px';
-        }
-        if (circleRect.left < gameAreaRect.left) {
-            circle.style.left = '0px';
-        }
-        if (circleRect.bottom > gameAreaRect.bottom) {
-            circle.style.top = `${gameAreaRect.bottom - gameAreaRect.top - circleRect.height}px`;
-        }
-        if (circleRect.right > gameAreaRect.right) {
-            circle.style.left = `${gameAreaRect.right - gameAreaRect.left - circleRect.width}px`;
-        }
+        let newLeft = pageX - shiftX - gameAreaRect.left;
+        let newTop = pageY - shiftY - gameAreaRect.top;
+
+        // Restrict movement within the game area
+        newLeft = Math.max(0, newLeft);
+        newLeft = Math.min(gameAreaRect.width - circle.offsetWidth, newLeft);
+        newTop = Math.max(0, newTop);
+        newTop = Math.min(gameAreaRect.height - circle.offsetHeight, newTop);
+
+        circle.style.left = newLeft + 'px';
+        circle.style.top = newTop + 'px';
     }
 
     // Function to move the circle to a random position
@@ -53,16 +51,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let shiftX = event.clientX - circle.getBoundingClientRect().left;
         let shiftY = event.clientY - circle.getBoundingClientRect().top;
 
-        circle.style.position = 'absolute';
-        circle.style.zIndex = 1000;
-        document.body.append(circle);
-
-        moveAt(event.pageX, event.pageY);
-
         function moveAt(pageX, pageY) {
-            circle.style.left = pageX - shiftX + 'px';
-            circle.style.top = pageY - shiftY + 'px';
-            keepCircleInBounds(circle, gameArea);
+            keepCircleInBounds(circle, gameArea, pageX, pageY, shiftX, shiftY);
         }
 
         function onMouseMove(event) {
@@ -79,10 +69,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 moveToRandomPosition(circle, gameArea);
             }
         };
-    };
 
-    circle.ondragstart = function() {
-        return false;
+        circle.ondragstart = function() {
+            return false;
+        };
     };
 
     moveToRandomPosition(circle, gameArea);
