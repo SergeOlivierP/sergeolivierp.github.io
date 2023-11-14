@@ -3,7 +3,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const square = document.getElementById('square');
     const gameArea = document.getElementById('gameArea');
 
-    // ... [isInsideSquare and moveToRandomPosition functions are unchanged]
+    / Function to check if circle is inside the square
+    function isInsideSquare(circle, square) {
+        const circleRect = circle.getBoundingClientRect();
+        const squareRect = square.getBoundingClientRect();
+
+        return (
+            circleRect.top >= squareRect.top &&
+            circleRect.left >= squareRect.left &&
+            circleRect.right <= squareRect.right &&
+            circleRect.bottom <= squareRect.bottom
+        );
+    }
 
     function keepCircleInBounds(circle, gameArea, pageX, pageY, shiftX, shiftY) {
         const gameAreaRect = gameArea.getBoundingClientRect();
@@ -11,7 +22,11 @@ document.addEventListener('DOMContentLoaded', () => {
         let newLeft = pageX - shiftX - gameAreaRect.left;
         let newTop = pageY - shiftY - gameAreaRect.top;
 
-        // ... [restrict movement within the game area is unchanged]
+        // Restrict movement within the game area
+        newLeft = Math.max(0, newLeft);
+        newLeft = Math.min(gameAreaRect.width - circle.offsetWidth, newLeft);
+        newTop = Math.max(0, newTop);
+        newTop = Math.min(gameAreaRect.height - circle.offsetHeight, newTop);
 
         circle.style.left = newLeft + 'px';
         circle.style.top = newTop + 'px';
