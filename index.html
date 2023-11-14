@@ -171,10 +171,12 @@ En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé
     </div>
     <div id="resultDisplay" style="display:none;"></div>
 </div>
-            <h2>Carré de sable</h2e>
-    <link rel="stylesheet" type="text/css" href="style.css">
-        <canvas id="gameCanvas" width="500" height="500"></canvas>
-        <script src="game.js"></script>
+                <div class="gameArea">
+                <h2>Carré de sable</h2>
+                <canvas id="gameCanvas" width="500" height="500"></canvas>
+                <script src="game.js"></script>
+                </div>
+            
             <button onclick="exportKanban()">Export Kanban</button>
             <input type="file" id="fileInput" onchange="importKanban()">
         <div id="kanbanBoard">
