@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const circle = document.getElementById('circle');
     const square = document.getElementById('square');
+    const gameArea = document.getElementById('gameArea');
 
     // Function to check if circle is inside the square
     function isInsideSquare(circle, square) {
@@ -13,6 +14,25 @@ document.addEventListener('DOMContentLoaded', () => {
             circleRect.right <= squareRect.right &&
             circleRect.bottom <= squareRect.bottom
         );
+    }
+
+    // Function to keep the circle within the game area
+    function keepCircleInBounds(circle, gameArea) {
+        const circleRect = circle.getBoundingClientRect();
+        const gameAreaRect = gameArea.getBoundingClientRect();
+
+        if (circleRect.top < gameAreaRect.top) {
+            circle.style.top = '0px';
+        }
+        if (circleRect.left < gameAreaRect.left) {
+            circle.style.left = '0px';
+        }
+        if (circleRect.bottom > gameAreaRect.bottom) {
+            circle.style.top = `${gameAreaRect.bottom - gameAreaRect.top - circleRect.height}px`;
+        }
+        if (circleRect.right > gameAreaRect.right) {
+            circle.style.left = `${gameAreaRect.right - gameAreaRect.left - circleRect.width}px`;
+        }
     }
 
     // Function to move the circle to a random position
@@ -42,6 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function moveAt(pageX, pageY) {
             circle.style.left = pageX - shiftX + 'px';
             circle.style.top = pageY - shiftY + 'px';
+            keepCircleInBounds(circle, gameArea);
         }
 
         function onMouseMove(event) {
@@ -55,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
             circle.onmouseup = null;
 
             if (isInsideSquare(circle, square)) {
-                moveToRandomPosition(circle, document.getElementById('gameArea'));
+                moveToRandomPosition(circle, gameArea);
             }
         };
     };
@@ -64,5 +85,5 @@ document.addEventListener('DOMContentLoaded', () => {
         return false;
     };
 
-    moveToRandomPosition(circle, document.getElementById('gameArea'));
+    moveToRandomPosition(circle, gameArea);
 });
