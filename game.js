@@ -1,82 +1,79 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const circle = document.getElementById('circle');
-    const square = document.getElementById('square');
-    const gameArea = document.getElementById('gameArea');
+const canvas = document.getElementById('gameCanvas');
+const ctx = canvas.getContext('2d');
 
-    function isInsideSquare(circle, square) {
-        const circleRect = circle.getBoundingClientRect();
-        const squareRect = square.getBoundingClientRect();
+const largeSquareSize = 400;
+const smallSquareSize = 100;
+const circleRadius = 10;
 
-        return (
-            circleRect.top >= squareRect.top &&
-            circleRect.left >= squareRect.left &&
-            circleRect.right <= squareRect.right &&
-            circleRect.bottom <= squareRect.bottom
-        );
+let circleX, circleY;
+
+function drawSquares() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+    // Draw large square
+    ctx.strokeRect(
+        (canvas.width - largeSquareSize) / 2,
+        (canvas.height - largeSquareSize) / 2,
+        largeSquareSize,
+        largeSquareSize
+    );
+
+    // Draw small square
+    ctx.strokeRect(
+        (canvas.width - smallSquareSize) / 2,
+        (canvas.height - smallSquareSize) / 2,
+        smallSquareSize,
+        smallSquareSize
+    );
+}
+
+function placeCircle() {
+    do {
+        circleX = Math.random() * (largeSquareSize - circleRadius * 2) + circleRadius + (canvas.width - largeSquareSize) / 2;
+        circleY = Math.random() * (largeSquareSize - circleRadius * 2) + circleRadius + (canvas.height - largeSquareSize) / 2;
+    } while (isInsideSmallSquare(circleX, circleY));
+
+    drawCircle();
+}
+
+function drawCircle() {
+    ctx.beginPath();
+    ctx.arc(circleX, circleY, circleRadius, 0, Math.PI * 2);
+    ctx.fillStyle = 'blue';
+    ctx.fill();
+    ctx.closePath();
+}
+
+function isInsideSmallSquare(x, y) {
+    const smallSquareLeft = (canvas.width - smallSquareSize) / 2;
+    const smallSquareTop = (canvas.height - smallSquareSize) / 2;
+
+    return x > smallSquareLeft && x < smallSquareLeft + smallSquareSize &&
+           y > smallSquareTop && y < smallSquareTop + smallSquareSize;
+}
+
+canvas.addEventListener('mousedown', function(e) {
+    if (ctx.isPointInPath(circleX, circleY)) {
+        canvas.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
     }
-
-    function keepCircleInBounds(circle, gameArea, pageX, pageY, shiftX, shiftY) {
-        const gameAreaRect = gameArea.getBoundingClientRect();
-
-        let newLeft = pageX - shiftX - gameAreaRect.left;
-        let newTop = pageY - shiftY - gameAreaRect.top;
-
-        newLeft = Math.max(0, newLeft);
-        newLeft = Math.min(gameAreaRect.width - circle.offsetWidth, newLeft);
-        newTop = Math.max(0, newTop);
-        newTop = Math.min(gameAreaRect.height - circle.offsetHeight, newTop);
-
-        circle.style.left = newLeft + 'px';
-        circle.style.top = newTop + 'px';
-    }
-
-    function moveToRandomPosition(circle, gameArea, square) {
-        const gameAreaRect = gameArea.getBoundingClientRect();
-        const squareRect = square.getBoundingClientRect();
-
-        let randomTop, randomLeft;
-
-        do {
-            randomTop = Math.random() * (gameAreaRect.height - circle.offsetHeight);
-            randomLeft = Math.random() * (gameAreaRect.width - circle.offsetWidth);
-        } while (
-            randomTop >= squareRect.top - gameAreaRect.top &&
-            randomTop <= squareRect.bottom - gameAreaRect.top - circle.offsetHeight &&
-            randomLeft >= squareRect.left - gameAreaRect.left &&
-            randomLeft <= squareRect.right - gameAreaRect.left - circle.offsetWidth
-        );
-
-        circle.style.top = `${randomTop}px`;
-        circle.style.left = `${randomLeft}px`;
-    }
-
-    circle.onmousedown = function(event) {
-        let shiftX = event.clientX - circle.getBoundingClientRect().left;
-        let shiftY = event.clientY - circle.getBoundingClientRect().top;
-
-        function moveAt(pageX, pageY) {
-            keepCircleInBounds(circle, gameArea, pageX, pageY, shiftX, shiftY);
-        }
-
-        function onMouseMove(event) {
-            moveAt(event.pageX, event.pageY);
-        }
-
-        document.addEventListener('mousemove', onMouseMove);
-
-        circle.onmouseup = function() {
-            document.removeEventListener('mousemove', onMouseMove);
-            circle.onmouseup = null;
-
-            if (isInsideSquare(circle, square)) {
-                moveToRandomPosition(circle, gameArea, square);
-            }
-        };
-
-        circle.ondragstart = function() {
-            return false;
-        };
-    };
-
-    moveToRandomPosition(circle, gameArea, square);
 });
+
+function onMouseMove(e) {
+    circleX = e.clientX - canvas.getBoundingClientRect().left;
+    circleY = e.clientY - canvas.getBoundingClientRect().top;
+    drawSquares();
+    drawCircle();
+}
+
+function onMouseUp(e) {
+    canvas.removeEventListener('mousemove', onMouseMove);
+    document.removeEventListener('mouseup', onMouseUp);
+
+    if (isInsideSmallSquare(circleX, circleY)) {
+        placeCircle();
+    }
+}
+
+drawSquares();
+placeCircle();
