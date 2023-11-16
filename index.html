@@ -415,6 +415,8 @@ function moveTask(task, currentColumn) {
 
         // Define targetDate globally
         let targetDate = new Date();
+        targetDate.setFullYear(targetDate.getFullYear(), 10, 17); // November is month 10 (0-indexed)
+        targetDate.setHours(0, 0, 0, 0);
         targetDate.setHours(targetDate.getHours() + 10); // Set initial target date 10 hours ahead
 
 
