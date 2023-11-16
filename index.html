@@ -413,12 +413,15 @@ function moveTask(task, currentColumn) {
                 .catch(error => console.error('Error loading headers:', error));
         }
 
+        // Define targetDate globally
+        let targetDate = new Date();
+        targetDate.setHours(targetDate.getHours() + 10); // Set initial target date 10 hours ahead
+
+
         function updateCountdown() {
             const now = new Date();
-            
-            // Calculate the difference in milliseconds between the target date and now
             const diff = targetDate - now;
-            
+    
             if (diff <= 0) {
                 document.getElementById("countdown").innerHTML = "00:00:00";
                 return;
@@ -431,23 +434,24 @@ function moveTask(task, currentColumn) {
             document.getElementById("countdown").innerHTML = `${hours}:${minutes}:${seconds}`;
         }
         function rewindTime() {
-            // Rewind the target date by 10 hours
-            targetDate.setHours(targetDate.getHours() - 10);
+            targetDate.setHours(targetDate.getHours() + 10); // Add 10 hours to the target date
             updateCountdown();
         }
-
+    
+        function showUnicornPopup() {
+            document.getElementById('unicornPopup').style.display = 'block';
+        }
+    
         document.getElementById('rewindButton').addEventListener('click', function() {
             rewindTime();
             showUnicornPopup();
         });
 
-        function showUnicornPopup() {
-            document.getElementById('unicornPopup').style.display = 'block';
-        }
+    setInterval(updateCountdown, 1000);
         
         let challenge = '';
         let odds = 0;
-        let playerOneGuess = 0;
+        let playerOneGuess = 0;e
 
         function setChallenge() {
             challenge = document.getElementById('challengeInput').value;
