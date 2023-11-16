@@ -412,11 +412,10 @@ function moveTask(task, currentColumn) {
                 })
                 .catch(error => console.error('Error loading headers:', error));
         }
+
         function updateCountdown() {
             const now = new Date();
-            // Set the target date and time to November 17, 2023, 23:55
-            const targetDate = new Date('2023-11-17T23:55:00');
-        
+            
             // Calculate the difference in milliseconds between the target date and now
             const diff = targetDate - now;
             
@@ -431,18 +430,17 @@ function moveTask(task, currentColumn) {
             
             document.getElementById("countdown").innerHTML = `${hours}:${minutes}:${seconds}`;
         }
-                document.getElementById('rewindButton').addEventListener('click', function() {
+        function rewindTime() {
+            // Rewind the target date by 10 hours
+            targetDate.setHours(targetDate.getHours() - 10);
+            updateCountdown();
+        }
+
+        document.getElementById('rewindButton').addEventListener('click', function() {
             rewindTime();
             showUnicornPopup();
         });
-        
-        function rewindTime() {
-            const now = new Date();
-            now.setHours(now.getHours() - 10);
-            targetDate.setTime(now.getTime());
-            updateCountdown();
-        }
-        
+
         function showUnicornPopup() {
             document.getElementById('unicornPopup').style.display = 'block';
         }
