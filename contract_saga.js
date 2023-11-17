@@ -34,6 +34,13 @@ function moveUp(button) {
     }
 }
 
+function moveDown(button) {
+    const clause = button.parentNode;
+    const nextClause = clause.nextElementSibling;
+    if (nextClause) {
+        clause.parentNode.insertBefore(nextClause, clause.nextSibling);
+    }
+}
 
 function checkOrder() {
     const clauses = document.querySelectorAll('#clauses .clause .clause-text');
