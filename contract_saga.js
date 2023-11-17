@@ -63,10 +63,10 @@ function checkOrder() {
 
     const resultElement = document.getElementById('contractCheckResult');
     if (isCorrectOrder) {
-        resultElement.innerText = "Success! The contract is correctly ordered.";
+        resultElement.innerText = "Bravo! Ce contrat est correct.";
         resultElement.style.color = "green";
     } else {
-        resultElement.innerText = "The contract is not in the right order, try again.";
+        resultElement.innerText = "Ce n'est pas un contrat valide, réessaie!";
         resultElement.style.color = "red";
     }
 }
