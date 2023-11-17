@@ -41,21 +41,17 @@
             gap: 20px; /* space between the images */
             padding-top: 20px;
         }
-        #contractGame .clause {
+        .clause {
             border: 1px solid black;
             padding: 5px;
             margin: 5px;
-            cursor: grab;
+            cursor: pointer;
             background-color: #f0f0f0;
+            list-style-type: none;
         }
-        
-        #contractGame #contractTemplate {
-            border: 2px dashed grey;
-            padding: 10px;
-            width: 300px;
-            height: auto;
-            min-height: 400px;
-            margin-top: 20px;
+
+        #clauses {
+            padding: 0;
         }
         .game-section {
             background-color: #007bff; /* Example of a lighter blue color */
@@ -208,7 +204,7 @@ Notre expertise en intelligence artificielle, combinée à notre acuité straté
 
 En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé à catalyser votre succès grâce à une approche consultative de classe mondiale et des solutions révolutionnaires.
 </p>
-            <section id="contractGame">
+            
                 <h2>Contract Crafting Saga</h2>
                 <ul id="clauses">
                     <!-- Clauses will be dynamically added here -->
@@ -218,7 +214,7 @@ En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé
                 <div id="result"></div>
             
                 <script src="contract_saga.js"></script>
-            </section>
+            
             
             <h2>Le jeu de la course</h2>
             <p> Joueur 1 appui sur Q, Joueur 2 appui sur P</p>
