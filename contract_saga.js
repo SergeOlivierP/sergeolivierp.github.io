@@ -43,6 +43,10 @@ function moveDown(button) {
     }
 }
 
+function closeModal() {
+            document.getElementById('resultModal').style.display = 'none';
+        }
+
 function checkOrder() {
     const clauses = document.querySelectorAll('#clauses .clause');
     let isCorrectOrder = true;
