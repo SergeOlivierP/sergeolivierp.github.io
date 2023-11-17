@@ -45,9 +45,21 @@ function moveDown(button) {
 
 function checkOrder() {
     const clauses = document.querySelectorAll('#clauses .clause');
-    const correctOrder = Array.from(clauses).every((clause, index) => {
-        return clause.id === 'clause' + (index + 1);
-    });
+    let isCorrectOrder = true;
 
-    document.getElementById('result').innerText = correctOrder ? "Contract is correctly ordered!" : "Contract is not in the right order, try again.";
+    for (let i = 0; i < clauses.length; i++) {
+        if (clauses[i].getAttribute('id') !== 'clause' + (i + 1)) {
+            isCorrectOrder = false;
+            break;
+        }
+    }
+
+    const resultElement = document.getElementById('result');
+    if (isCorrectOrder) {
+        resultElement.innerText = "Success! The contract is correctly ordered.";
+        resultElement.style.color = "green"; // Optional: Change text color for success
+    } else {
+        resultElement.innerText = "The contract is not in the right order, try again.";
+        resultElement.style.color = "red"; // Optional: Change text color for error
+    }
 }
