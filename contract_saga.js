@@ -34,6 +34,7 @@ function moveUp(button) {
     }
 }
 
+
 function checkOrder() {
     const clauses = document.querySelectorAll('#clauses .clause .clause-text');
     let isCorrectOrder = true;
@@ -47,10 +48,10 @@ function checkOrder() {
 
     const resultElement = document.getElementById('contractCheckResult');
     if (isCorrectOrder) {
-        resultElement.innerText = "Bravo! Le contrat est bien rédigé.";
+        resultElement.innerText = "Success! The contract is correctly ordered.";
         resultElement.style.color = "green";
     } else {
-        resultElement.innerText = "Ce contrat est incorrect, réessaie";
+        resultElement.innerText = "The contract is not in the right order, try again.";
         resultElement.style.color = "red";
     }
 }
