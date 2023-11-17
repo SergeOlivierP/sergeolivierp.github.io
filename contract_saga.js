@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
         "En cas de résiliation, les obligations qui, par leur nature, survivent à la résiliation, resteront en vigueur.",
     ];
 
-    // Randomize and add clauses to the DOM
     const clausesContainer = document.getElementById('clauses');
     clausesText.sort(() => Math.random() - 0.5).forEach((text, index) => {
         const clause = document.createElement('li');
@@ -39,13 +38,9 @@ function moveDown(button) {
     const clause = button.parentNode;
     const nextClause = clause.nextElementSibling;
     if (nextClause) {
-        clause.parentNode.insertBefore(clause, nextClause.nextSibling);
+        clause.parentNode.insertBefore(nextClause, clause.nextSibling);
     }
 }
-
-function closeModal() {
-            document.getElementById('resultModal').style.display = 'none';
-        }
 
 function checkOrder() {
     const clauses = document.querySelectorAll('#clauses .clause');
@@ -56,15 +51,6 @@ function checkOrder() {
             isCorrectOrder = false;
             break;
         }
-    }
-
-    const resultElement = document.getElementById('result');
-    if (isCorrectOrder) {
-        resultElement.innerText = "Success! The contract is correctly ordered.";
-        resultElement.style.color = "green"; // Optional: Change text color for success
-    } else {
-        resultElement.innerText = "The contract is not in the right order, try again.";
-        resultElement.style.color = "red"; // Optional: Change text color for error
     }
 
     const modalTextElement = document.getElementById('modalText');
@@ -79,5 +65,8 @@ function checkOrder() {
     }
 
     modalElement.style.display = 'flex';
+}
 
+function closeModal() {
+    document.getElementById('resultModal').style.display = 'none';
 }
