@@ -35,11 +35,11 @@ function moveUp(button) {
 }
 
 function checkOrder() {
-    const clauses = document.querySelectorAll('#clauses .clause');
+    const clauses = document.querySelectorAll('#clauses .clause .clause-text');
     let isCorrectOrder = true;
 
     for (let i = 0; i < clauses.length; i++) {
-        if (clauses[i].getAttribute('id') !== 'clause' + (i + 1)) {
+        if (clauses[i].textContent.trim() !== clausesText[i].trim()) {
             isCorrectOrder = false;
             break;
         }
@@ -47,10 +47,10 @@ function checkOrder() {
 
     const resultElement = document.getElementById('contractCheckResult');
     if (isCorrectOrder) {
-        resultElement.innerText = "Success! The contract is correctly ordered.";
+        resultElement.innerText = "Bravo! Le contrat est bien rédigé.";
         resultElement.style.color = "green";
     } else {
-        resultElement.innerText = "The contract is not in the right order, try again.";
+        resultElement.innerText = "Ce contrat est incorrect, réessaie";
         resultElement.style.color = "red";
     }
 }
