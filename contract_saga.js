@@ -1,5 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const clausesText = [
+const clausesText = [
         "Les parties conviennent des termes et conditions suivants.",
         "Ce contrat sera régi par les lois de l'État du Québec",
         "Tout litige découlant de ce contrat sera résolu par arbitrage.",
@@ -12,8 +11,9 @@ document.addEventListener('DOMContentLoaded', () => {
         "En cas de résiliation, les obligations qui, par leur nature, survivent à la résiliation, resteront en vigueur.",
     ];
 
-        const clausesContainer = document.getElementById('clauses');
-    clausesText.sort(() => Math.random() - 0.5).forEach((text, index) => {
+document.addEventListener('DOMContentLoaded', () => {
+    const clausesContainer = document.getElementById('clauses');
+    clausesText.forEach((text, index) => {
         const clause = document.createElement('li');
         clause.setAttribute('id', 'clause' + (index + 1));
         clause.classList.add('clause');
@@ -38,7 +38,7 @@ function moveDown(button) {
     const clause = button.parentNode;
     const nextClause = clause.nextElementSibling;
     if (nextClause) {
-        clause.parentNode.insertBefore(nextClause, clause.nextSibling);
+        clause.parentNode.insertBefore(nextClause.nextSibling, clause);
     }
 }
 
