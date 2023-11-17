@@ -397,38 +397,6 @@ En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé
         document.getElementById(column + "Tasks").appendChild(task);
     }
         }
-        function allowDrop(event) {
-            event.preventDefault(); // Prevent default to allow drop
-        }
-        
-        function drag(event) {
-            event.dataTransfer.setData("text", event.target.id); // Set the data type and the id of the dragged element
-        }
-        
-        function drop(event) {
-            event.preventDefault();
-            var data = event.dataTransfer.getData("text");
-            var clause = document.getElementById(data);
-        
-            // Check if the clause is being dropped on the contractTemplate or its child elements
-            if (event.target.id === "contractTemplate" || event.target.closest('#contractTemplate')) {
-                event.target.appendChild(clause);
-            }
-        }
-        
-        function checkOrder() {
-            const contract = document.getElementById("contractTemplate");
-            let clauses = contract.getElementsByTagName("p");
-            let correctOrder = true;
-            for (let i = 0; i < clauses.length; i++) {
-                if (parseInt(clauses[i].id.replace('clause', '')) !== i + 1) {
-                    correctOrder = false;
-                    break;
-                }
-            }
-            let resultText = correctOrder ? "Contract is correctly ordered!" : "Contract is not in the right order, try again.";
-            document.getElementById("result").innerText = resultText;
-        }
         
         function moveTask(task, currentColumn) {
             const nextColumnMap = {
