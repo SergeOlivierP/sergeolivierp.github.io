@@ -66,4 +66,18 @@ function checkOrder() {
         resultElement.innerText = "The contract is not in the right order, try again.";
         resultElement.style.color = "red"; // Optional: Change text color for error
     }
+
+    const modalTextElement = document.getElementById('modalText');
+    const modalElement = document.getElementById('resultModal');
+
+    if (isCorrectOrder) {
+        modalTextElement.innerText = "Success! The contract is correctly ordered.";
+        modalTextElement.style.color = "green";
+    } else {
+        modalTextElement.innerText = "The contract is not in the right order, try again.";
+        modalTextElement.style.color = "red";
+    }
+
+    modalElement.style.display = 'flex';
+
 }
