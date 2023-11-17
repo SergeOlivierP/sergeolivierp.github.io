@@ -42,50 +42,60 @@
             padding-top: 20px;
         }
         #contractCraftingSaga {
-            background-color: #f8f8f8; /* Light background for the section */
-            border-radius: 8px; /* Rounded corners */
-            padding: 20px; /* Padding around the content */
-            margin: 20px 0; /* Margin for spacing around the section */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+            background-color: #f8f8f8;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         
         #contractCraftingSaga h2 {
-            color: #333; /* Dark color for the title */
-            text-align: center; /* Center the title */
-            margin-bottom: 15px; /* Space below the title */
+            color: #333;
+            text-align: center;
+            margin-bottom: 15px;
         }
         
         #clauses {
-            list-style-type: none; /* Remove default list styling */
-            padding: 0; /* Remove default padding */
-            margin-bottom: 15px; /* Space below the list */
+            list-style-type: none;
+            padding: 0;
+            margin-bottom: 15px;
         }
         
         #clauses .clause {
-            background-color: #fff; /* White background for each clause */
-            border: 1px solid #ddd; /* Border for each clause */
-            padding: 10px; /* Padding inside each clause */
-            margin-bottom: 5px; /* Space between clauses */
-            border-radius: 4px; /* Rounded corners for clauses */
-            display: flex; /* Flex layout for the content and buttons */
-            align-items: center; /* Vertically align items in the middle */
+            background-color: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 5px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between; /* Ensures space between text and buttons */
+        }
+        
+        .clause-text {
+            flex-grow: 1; /* Allows text to take up available space */
+            margin-left: 10px; /* Space between down button and text */
         }
         
         .move-button {
-            background-color: #e0e0e0; /* Light grey background for buttons */
-            border: none; /* Remove border */
-            padding: 5px 10px; /* Padding inside buttons */
-            margin: 0 5px; /* Margin around buttons */
-            cursor: pointer; /* Pointer cursor on hover */
-            border-radius: 4px; /* Rounded corners for buttons */
+            background-color: #e0e0e0;
+            border: none;
+            padding: 5px 10px;
+            margin: 0 5px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        
+        .move-button:last-child {
+            margin-left: auto; /* Pushes the last button (up arrow) to the far right */
         }
         
         #contractCheckResult {
-            text-align: center; /* Center the result text */
-            padding: 10px; /* Padding around result text */
-            border-radius: 4px; /* Rounded corners for result box */
-            color: #333; /* Dark color for the result text */
-            margin-top: 10px; /* Space above the result box */
+            text-align: center;
+            padding: 10px;
+            border-radius: 4px;
+            color: #333;
+            margin-top: 10px;
         }
         .game-section {
             background-color: #007bff; /* Example of a lighter blue color */
