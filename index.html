@@ -41,19 +41,20 @@
             gap: 20px; /* space between the images */
             padding-top: 20px;
         }
-        #clauses p {
+        #contractGame .clause {
             border: 1px solid black;
             padding: 5px;
-            width: 250px;
-            margin: 10px;
-            cursor: pointer;
+            margin: 5px;
+            cursor: grab;
+            background-color: #f0f0f0;
         }
-
-        #contractTemplate {
+        
+        #contractGame #contractTemplate {
             border: 2px dashed grey;
             padding: 10px;
             width: 300px;
-            height: 400px;
+            height: auto;
+            min-height: 400px;
             margin-top: 20px;
         }
         .game-section {
@@ -207,7 +208,7 @@ Notre expertise en intelligence artificielle, combinée à notre acuité straté
 
 En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé à catalyser votre succès grâce à une approche consultative de classe mondiale et des solutions révolutionnaires.
 </p>
-
+            <section id="contractGame">
             <h2>Contract Crafting Saga</h2>
                 <div id="clauses">
                     <p draggable="true" ondragstart="drag(event)" id="clause1">1. Les parties conviennent des termes et conditions suivants.</p>
@@ -229,36 +230,7 @@ En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé
             
                 <button onclick="checkOrder()">Soumettre contrat</button>
                 <div id="result"></div>
-            
-                <script>
-                function allowDrop(event) {
-                    event.preventDefault();
-                }
-        
-                function drag(event) {
-                    event.dataTransfer.setData("text", event.target.id);
-                }
-        
-                function drop(event) {
-                    event.preventDefault();
-                    var data = event.dataTransfer.getData("text");
-                    event.target.appendChild(document.getElementById(data));
-                }
-        
-                function checkOrder() {
-                    const contract = document.getElementById("contractTemplate");
-                    let clauses = contract.getElementsByTagName("p");
-                    let correctOrder = true;
-                    for (let i = 0; i < clauses.length; i++) {
-                        if (parseInt(clauses[i].id.replace('clause', '')) !== i + 1) {
-                            correctOrder = false;
-                            break;
-                        }
-                    }
-                    let resultText = correctOrder ? "Contract is correctly ordered!" : "Contract is not in the right order, try again.";
-                    document.getElementById("result").innerText = resultText;
-                }
-            </script>
+                </section>
             
             <h2>Le jeu de la course</h2>
             <p> Joueur 1 appui sur Q, Joueur 2 appui sur P</p>
@@ -395,18 +367,49 @@ En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé
 
         document.getElementById(column + "Tasks").appendChild(task);
     }
-}
-
-function moveTask(task, currentColumn) {
-    const nextColumnMap = {
-        'todo': 'inProgressTasks',
-        'inProgress': 'doneTasks'
-    };
-    const nextColumn = nextColumnMap[currentColumn];
-    if (nextColumn) {
-        document.getElementById(nextColumn).appendChild(task);
-    }
-}
+        }
+                function allowDrop(event) {
+            event.preventDefault();
+        }
+        
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+        
+        function drop(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            var clause = document.getElementById(data);
+        
+            if (event.target.id === "contractTemplate" || event.target.parentNode.id === "contractTemplate") {
+                event.target.appendChild(clause);
+            }
+        }
+        
+        function checkOrder() {
+            const contract = document.getElementById("contractTemplate");
+            let clauses = contract.getElementsByTagName("p");
+            let correctOrder = true;
+            for (let i = 0; i < clauses.length; i++) {
+                if (parseInt(clauses[i].id.replace('clause', '')) !== i + 1) {
+                    correctOrder = false;
+                    break;
+                }
+            }
+            let resultText = correctOrder ? "Contract is correctly ordered!" : "Contract is not in the right order, try again.";
+            document.getElementById("result").innerText = resultText;
+        }
+        
+        function moveTask(task, currentColumn) {
+            const nextColumnMap = {
+                'todo': 'inProgressTasks',
+                'inProgress': 'doneTasks'
+            };
+            const nextColumn = nextColumnMap[currentColumn];
+            if (nextColumn) {
+                document.getElementById(nextColumn).appendChild(task);
+            }
+        }
     
     function dragStart(e) {
         e.dataTransfer.setData("text", e.target.id);
