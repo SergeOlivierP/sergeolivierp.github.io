@@ -53,20 +53,12 @@ function checkOrder() {
         }
     }
 
-    const modalTextElement = document.getElementById('modalText');
-    const modalElement = document.getElementById('resultModal');
-
+    const resultElement = document.getElementById('result');
     if (isCorrectOrder) {
-        modalTextElement.innerText = "Success! The contract is correctly ordered.";
-        modalTextElement.style.color = "green";
+        resultElement.innerText = "Success! The contract is correctly ordered.";
+        resultElement.style.color = "green";
     } else {
-        modalTextElement.innerText = "The contract is not in the right order, try again.";
-        modalTextElement.style.color = "red";
+        resultElement.innerText = "The contract is not in the right order, try again.";
+        resultElement.style.color = "red";
     }
-
-    modalElement.style.display = 'flex';
-}
-
-function closeModal() {
-    document.getElementById('resultModal').style.display = 'none';
 }
