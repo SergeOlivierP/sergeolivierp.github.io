@@ -41,63 +41,51 @@
             gap: 20px; /* space between the images */
             padding-top: 20px;
         }
-        .clause {
-            border: 1px solid black;
-            padding: 5px;
-            margin: 5px;
-            background-color: #001F3F;
-            list-style-type: none;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
+        #contractCraftingSaga {
+            background-color: #f8f8f8; /* Light background for the section */
+            border-radius: 8px; /* Rounded corners */
+            padding: 20px; /* Padding around the content */
+            margin: 20px 0; /* Margin for spacing around the section */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
         }
-
-        .clause-text {
-            flex-grow: 1;
-            text-align: center;
+        
+        #contractCraftingSaga h2 {
+            color: #333; /* Dark color for the title */
+            text-align: center; /* Center the title */
+            margin-bottom: 15px; /* Space below the title */
         }
-
-        .button-container {
-            display: flex;
-            flex-shrink: 0; /* Prevent buttons from shrinking */
-        }
-
-        .move-button {
-            cursor: pointer;
-            background-color: #e0e0e0;
-            border: none;
-            padding: 5px 10px;
-            margin: 0 5px;
-        }
-
+        
         #clauses {
-            padding: 0;
+            list-style-type: none; /* Remove default list styling */
+            padding: 0; /* Remove default padding */
+            margin-bottom: 15px; /* Space below the list */
         }
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
+        
+        #clauses .clause {
+            background-color: #fff; /* White background for each clause */
+            border: 1px solid #ddd; /* Border for each clause */
+            padding: 10px; /* Padding inside each clause */
+            margin-bottom: 5px; /* Space between clauses */
+            border-radius: 4px; /* Rounded corners for clauses */
+            display: flex; /* Flex layout for the content and buttons */
+            align-items: center; /* Vertically align items in the middle */
         }
-
-        .modal-content {
-            background-color: white;
-            padding: 20px;
-            border-radius: 5px;
-            text-align: center;
+        
+        .move-button {
+            background-color: #e0e0e0; /* Light grey background for buttons */
+            border: none; /* Remove border */
+            padding: 5px 10px; /* Padding inside buttons */
+            margin: 0 5px; /* Margin around buttons */
+            cursor: pointer; /* Pointer cursor on hover */
+            border-radius: 4px; /* Rounded corners for buttons */
         }
-
-        .close {
-            cursor: pointer;
-            float: right;
-            font-size: 20px;
+        
+        #contractCheckResult {
+            text-align: center; /* Center the result text */
+            padding: 10px; /* Padding around result text */
+            border-radius: 4px; /* Rounded corners for result box */
+            color: #333; /* Dark color for the result text */
+            margin-top: 10px; /* Space above the result box */
         }
         .game-section {
             background-color: #007bff; /* Example of a lighter blue color */
@@ -251,15 +239,15 @@ Notre expertise en intelligence artificielle, combinée à notre acuité straté
 En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé à catalyser votre succès grâce à une approche consultative de classe mondiale et des solutions révolutionnaires.
 </p>
             
-                <h2>Contract Crafting Saga</h2>
-                <ul id="clauses">
-                    <!-- Clauses will be dynamically added here -->
-                </ul>
-            
-                <button onclick="checkOrder()">Soumettre Contrat</button>
-                <div id="contractCheckResult"></div>
-
-                <script src="contract_saga.js"></script>
+                <section id="contractCraftingSaga">
+                    <h2>Contract Crafting Saga</h2>
+                    <ul id="clauses">
+                        <!-- Clauses will be dynamically added here -->
+                    </ul>
+                
+                    <button onclick="checkOrder()">Soumettre Contrat</button>
+                    <div id="contractCheckResult"></div>
+                </section>
             
             
             <h2>Le jeu de la course</h2>
