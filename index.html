@@ -209,28 +209,16 @@ Notre expertise en intelligence artificielle, combinée à notre acuité straté
 En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé à catalyser votre succès grâce à une approche consultative de classe mondiale et des solutions révolutionnaires.
 </p>
             <section id="contractGame">
-            <h2>Contract Crafting Saga</h2>
-                <div id="clauses">
-                    <p draggable="true" ondragstart="drag(event)" id="clause1">1. Les parties conviennent des termes et conditions suivants.</p>
-                    <p draggable="true" ondragstart="drag(event)" id="clause2">2. Ce contrat sera régi par les lois de l'État de [État].</p>
-                    <p draggable="true" ondragstart="drag(event)" id="clause3">3. Tout litige découlant de ce contrat sera résolu par arbitrage.</p>
-                    <p draggable="true" ondragstart="drag(event)" id="clause4">4. La durée du contrat est de deux ans à compter de la date de signature.</p>
-                    <p draggable="true" ondragstart="drag(event)" id="clause5">5. Les deux parties s'engagent à maintenir la confidentialité concernant les termes du contrat.</p>
-                    <p draggable="true" ondragstart="drag(event)" id="clause6">6. Ce contrat prend effet à la date de signature par les deux parties.</p>
-                    <p draggable="true" ondragstart="drag(event)" id="clause7">7. Les obligations des parties sous ce contrat seront nulles en cas de force majeure.</p>
-                    <p draggable="true" ondragstart="drag(event)" id="clause8">8. Toute modification de ce contrat doit être effectuée par écrit et signée par les deux parties.</p>
-                    <p draggable="true" ondragstart="drag(event)" id="clause9">9. Ce contrat peut être résilié par l'une ou l'autre des parties avec un préavis écrit de 30 jours.</p>
-                    <p draggable="true" ondragstart="drag(event)" id="clause10">10. En cas de résiliation, les obligations qui, par leur nature, survivent à la résiliation, resteront en vigueur.</p>
-                </div>
+                <h2>Contract Crafting Saga</h2>
+                <ul id="clauses">
+                    <!-- Clauses will be dynamically added here -->
+                </ul>
             
-                <div id="contractTemplate" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    <h3>Modèle de contrat</h3>
-                    <!-- Clauses will be dropped here -->
-                </div>
-            
-                <button onclick="checkOrder()">Soumettre contrat</button>
+                <button onclick="checkOrder()">Submit Contract</button>
                 <div id="result"></div>
-                </section>
+            
+                <script src="contract_saga.js"></script>
+            </section>
             
             <h2>Le jeu de la course</h2>
             <p> Joueur 1 appui sur Q, Joueur 2 appui sur P</p>
