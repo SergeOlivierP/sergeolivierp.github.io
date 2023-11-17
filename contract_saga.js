@@ -1,15 +1,11 @@
 const clausesText = [
-        "Les parties conviennent des termes et conditions suivants.",
-        "Ce contrat sera régi par les lois de l'État du Québec",
-        "Tout litige découlant de ce contrat sera résolu par arbitrage.",
-        "La durée du contrat est de deux ans à compter de la date de signature.",
-        "Les deux parties s'engagent à maintenir la confidentialité concernant les termes du contrat.",
-        "Ce contrat prend effet à la date de signature par les deux parties.",
-        "Les obligations des parties sous ce contrat seront nulles en cas de force majeure.",
-        "Toute modification de ce contrat doit être effectuée par écrit et signée par les deux parties.",
-        "Ce contrat peut être résilié par l'une ou l'autre des parties avec un préavis écrit de 30 jours.",
-        "En cas de résiliation, les obligations qui, par leur nature, survivent à la résiliation, resteront en vigueur.",
-    ];
+    "Les parties énoncent leur accord sur les termes et conditions ci-après.",
+    "Ce contrat est régi par les lois de l'État du Québec et prend effet dès sa signature par les deux parties.",
+    "La durée du présent contrat est fixée à deux ans à compter de la date de signature.",
+    "Les deux parties s'engagent à préserver la confidentialité des informations contenues dans ce contrat.",
+    "En cas de litige, les parties conviennent d'un règlement par arbitrage.",
+    "Ce contrat peut être résilié par l'une ou l'autre partie moyennant un préavis écrit de 30 jours."
+];
 
 document.addEventListener('DOMContentLoaded', () => {
     // Shuffle the clausesText array
