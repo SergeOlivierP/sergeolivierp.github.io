@@ -39,7 +39,7 @@ function moveDown(button) {
     const clause = button.parentNode;
     const nextClause = clause.nextElementSibling;
     if (nextClause) {
-        clause.parentNode.insertBefore(nextClause, clause.nextSibling);
+        clause.parentNode.insertBefore(clause, nextClause.nextSibling);
     }
 }
 
