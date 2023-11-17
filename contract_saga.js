@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
     const clausesText = [
         "Les parties conviennent des termes et conditions suivants.",
         "Ce contrat sera régi par les lois de l'État du Québec",
@@ -19,8 +19,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
         clause.classList.add('clause');
         clause.textContent = text;
         clause.addEventListener('dragstart', dragStart);
-        clause.addEventListener('dragover', dragOver);
-        clause.addEventListener('drop', drop);
         return clause;
     });
 
@@ -30,50 +28,44 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Add clauses to the DOM
     const clausesContainer = document.getElementById('clauses');
     clauses.forEach(clause => clausesContainer.appendChild(clause));
+
+    // Enable reordering within the list
+    clausesContainer.addEventListener('dragover', (event) => {
+        event.preventDefault();
+        const afterElement = getDragAfterElement(clausesContainer, event.clientY);
+        const draggable = document.querySelector('.dragging');
+        if (afterElement == null) {
+            clausesContainer.appendChild(draggable);
+        } else {
+            clausesContainer.insertBefore(draggable, afterElement);
+        }
+    });
 });
 
 function dragStart(event) {
-    event.dataTransfer.setData('text/plain', event.target.id);
+    event.target.classList.add('dragging');
+    setTimeout(() => event.target.classList.remove('dragging'), 0);
 }
 
-function dragOver(event) {
-    event.preventDefault();
-    const target = event.target;
-    const bounding = target.getBoundingClientRect();
-    const offset = bounding.y + bounding.height / 2;
-    if (event.clientY - offset > 0) {
-        target.style['border-bottom'] = 'solid 4px blue';
-        target.style['border-top'] = '';
-    } else {
-        target.style['border-top'] = 'solid 4px blue';
-        target.style['border-bottom'] = '';
-    }
-}
+function getDragAfterElement(container, y) {
+    const draggableElements = [...container.querySelectorAll('.clause:not(.dragging)')];
 
-function drop(event) {
-    event.preventDefault();
-    const draggedId = event.dataTransfer.getData('text/plain');
-    const draggedElement = document.getElementById(draggedId);
-    const targetElement = event.target;
-    const targetBounding = targetElement.getBoundingClientRect();
-    const targetOffset = targetBounding.y + targetBounding.height / 2;
-
-    targetElement.style['border-bottom'] = '';
-    targetElement.style['border-top'] = '';
-
-    if (event.clientY - targetOffset > 0) {
-        targetElement.after(draggedElement);
-    } else {
-        targetElement.before(draggedElement);
-    }
+    return draggableElements.reduce((closest, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = y - box.top - box.height / 2;
+        if (offset < 0 && offset > closest.offset) {
+            return { offset: offset, element: child };
+        } else {
+            return closest;
+        }
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
 function checkOrder() {
     const clauses = document.querySelectorAll('#clauses .clause');
-    const correctOrder = clauses.every((clause, index) => {
+    const correctOrder = Array.from(clauses).every((clause, index) => {
         return clause.id === 'clause' + (index + 1);
     });
 
-    let resultText = correctOrder ? "Contract is correctly ordered!" : "Contract is not in the right order, try again.";
-    document.getElementById('result').innerText = resultText;
+    document.getElementById('result').innerText = correctOrder ? "Contract is correctly ordered!" : "Contract is not in the right order, try again.";
 }
