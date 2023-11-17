@@ -12,8 +12,14 @@ const clausesText = [
     ];
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Shuffle the clausesText array
+    const shuffledClausesText = clausesText
+        .map((value) => ({ value, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(({ value }) => value);
+
     const clausesContainer = document.getElementById('clauses');
-    clausesText.forEach((text, index) => {
+    shuffledClausesText.forEach((text, index) => {
         const clause = document.createElement('li');
         clause.setAttribute('id', 'clause' + (index + 1));
         clause.classList.add('clause');
@@ -25,6 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         clausesContainer.appendChild(clause);
     });
 });
+
+
 
 function moveUp(button) {
     const clause = button.parentNode;
