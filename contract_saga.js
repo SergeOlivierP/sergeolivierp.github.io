@@ -34,14 +34,6 @@ function moveUp(button) {
     }
 }
 
-function moveDown(button) {
-    const clause = button.parentNode;
-    const nextClause = clause.nextElementSibling;
-    if (nextClause) {
-        clause.parentNode.insertBefore(nextClause, clause.nextSibling);
-    }
-}
-
 function checkOrder() {
     const clauses = document.querySelectorAll('#clauses .clause');
     let isCorrectOrder = true;
@@ -53,7 +45,7 @@ function checkOrder() {
         }
     }
 
-    const resultElement = document.getElementById('result');
+    const resultElement = document.getElementById('contractCheckResult');
     if (isCorrectOrder) {
         resultElement.innerText = "Success! The contract is correctly ordered.";
         resultElement.style.color = "green";
