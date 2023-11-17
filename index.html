@@ -368,12 +368,12 @@ En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé
         document.getElementById(column + "Tasks").appendChild(task);
     }
         }
-                function allowDrop(event) {
-            event.preventDefault();
+        function allowDrop(event) {
+            event.preventDefault(); // Prevent default to allow drop
         }
         
         function drag(event) {
-            event.dataTransfer.setData("text", event.target.id);
+            event.dataTransfer.setData("text", event.target.id); // Set the data type and the id of the dragged element
         }
         
         function drop(event) {
@@ -381,7 +381,8 @@ En choisissant HAIAI.AI, vous optez pour un partenaire de confiance, déterminé
             var data = event.dataTransfer.getData("text");
             var clause = document.getElementById(data);
         
-            if (event.target.id === "contractTemplate" || event.target.parentNode.id === "contractTemplate") {
+            // Check if the clause is being dropped on the contractTemplate or its child elements
+            if (event.target.id === "contractTemplate" || event.target.closest('#contractTemplate')) {
                 event.target.appendChild(clause);
             }
         }
