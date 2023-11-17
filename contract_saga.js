@@ -12,53 +12,35 @@ document.addEventListener('DOMContentLoaded', () => {
         "En cas de résiliation, les obligations qui, par leur nature, survivent à la résiliation, resteront en vigueur.",
     ];
 
-        const clauses = clausesText.map((text, index) => {
+        // Randomize and add clauses to the DOM
+    const clausesContainer = document.getElementById('clauses');
+    clausesText.sort(() => Math.random() - 0.5).forEach((text, index) => {
         const clause = document.createElement('li');
-        clause.setAttribute('draggable', true);
         clause.setAttribute('id', 'clause' + (index + 1));
         clause.classList.add('clause');
-        clause.textContent = text;
-        clause.addEventListener('dragstart', dragStart);
-        return clause;
-    });
-
-    // Randomize clauses
-    clauses.sort(() => Math.random() - 0.5);
-
-    // Add clauses to the DOM
-    const clausesContainer = document.getElementById('clauses');
-    clauses.forEach(clause => clausesContainer.appendChild(clause));
-
-    // Enable reordering within the list
-    clausesContainer.addEventListener('dragover', (event) => {
-        event.preventDefault();
-        const afterElement = getDragAfterElement(clausesContainer, event.clientY);
-        const draggable = document.querySelector('.dragging');
-        if (afterElement == null) {
-            clausesContainer.appendChild(draggable);
-        } else {
-            clausesContainer.insertBefore(draggable, afterElement);
-        }
+        clause.innerHTML = `
+            <span>${text}</span>
+            <button class="move-button" onclick="moveUp(this)">↑</button>
+            <button class="move-button" onclick="moveDown(this)">↓</button>
+        `;
+        clausesContainer.appendChild(clause);
     });
 });
 
-function dragStart(event) {
-    event.target.classList.add('dragging');
-    setTimeout(() => event.target.classList.remove('dragging'), 0);
+function moveUp(button) {
+    const clause = button.parentNode;
+    const previousClause = clause.previousElementSibling;
+    if (previousClause) {
+        clause.parentNode.insertBefore(clause, previousClause);
+    }
 }
 
-function getDragAfterElement(container, y) {
-    const draggableElements = [...container.querySelectorAll('.clause:not(.dragging)')];
-
-    return draggableElements.reduce((closest, child) => {
-        const box = child.getBoundingClientRect();
-        const offset = y - box.top - box.height / 2;
-        if (offset < 0 && offset > closest.offset) {
-            return { offset: offset, element: child };
-        } else {
-            return closest;
-        }
-    }, { offset: Number.NEGATIVE_INFINITY }).element;
+function moveDown(button) {
+    const clause = button.parentNode;
+    const nextClause = clause.nextElementSibling;
+    if (nextClause) {
+        clause.parentNode.insertBefore(nextClause, clause);
+    }
 }
 
 function checkOrder() {
