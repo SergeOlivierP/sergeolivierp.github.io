@@ -12,16 +12,16 @@ document.addEventListener('DOMContentLoaded', () => {
         "En cas de résiliation, les obligations qui, par leur nature, survivent à la résiliation, resteront en vigueur.",
     ];
 
-        // Randomize and add clauses to the DOM
+    // Randomize and add clauses to the DOM
     const clausesContainer = document.getElementById('clauses');
     clausesText.sort(() => Math.random() - 0.5).forEach((text, index) => {
         const clause = document.createElement('li');
         clause.setAttribute('id', 'clause' + (index + 1));
         clause.classList.add('clause');
         clause.innerHTML = `
-            <span>${text}</span>
-            <button class="move-button" onclick="moveUp(this)">↑</button>
             <button class="move-button" onclick="moveDown(this)">↓</button>
+            <span class="clause-text">${text}</span>
+            <button class="move-button" onclick="moveUp(this)">↑</button>
         `;
         clausesContainer.appendChild(clause);
     });
@@ -39,7 +39,7 @@ function moveDown(button) {
     const clause = button.parentNode;
     const nextClause = clause.nextElementSibling;
     if (nextClause) {
-        clause.parentNode.insertBefore(nextClause, clause);
+        clause.parentNode.insertBefore(nextClause, clause.nextSibling);
     }
 }
 
