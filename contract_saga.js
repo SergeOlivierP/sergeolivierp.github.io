@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
         "En cas de résiliation, les obligations qui, par leur nature, survivent à la résiliation, resteront en vigueur.",
     ];
 
-    const clauses = clausesText.map((text, index) => {
+        const clauses = clausesText.map((text, index) => {
         const clause = document.createElement('li');
         clause.setAttribute('draggable', true);
         clause.setAttribute('id', 'clause' + (index + 1));
