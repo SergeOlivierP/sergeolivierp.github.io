@@ -58,12 +58,20 @@
         }
         .team-entry {
             display: flex;
-            justify-content: space-between;
             align-items: center;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
         }
-        .team-entry input {
-            width: 60%;
+        .team-bar {
+            flex-grow: 1;
+            height: 20px;
+            background-color: #007bff;
+            border-radius: 5px;
+            margin-left: 10px;
+            transition: width 0.3s;
+        }
+        .team-name {
+            width: 120px;
+            font-weight: bold;
         }
     </style>
 </head>
@@ -100,6 +108,7 @@
         let currentQuestion = 0;
         let score = 0;
         let teams = {}; // Object to store teams and their scores
+        const maxBarWidth = 500; // Max width of the score bar in pixels
 
         // Function to load the TSV file and parse it into questions array
         async function loadQuestions() {
@@ -203,10 +212,24 @@
             for (const [team, points] of Object.entries(teams)) {
                 const teamEntry = document.createElement("div");
                 teamEntry.className = "team-entry";
-                teamEntry.innerHTML = `
-                    <span><strong>${team}</strong>: ${points} points</span>
-                    <button onclick="addPoints('${team}')">+1 point</button>
-                `;
+
+                const teamNameSpan = document.createElement("span");
+                teamNameSpan.className = "team-name";
+                teamNameSpan.textContent = team;
+
+                const teamBar = document.createElement("div");
+                teamBar.className = "team-bar";
+                teamBar.style.width = `${(points / Math.max(...Object.values(teams), 1)) * maxBarWidth}px`;
+
+                const addButton = document.createElement("button");
+                addButton.textContent = "+1 point";
+                addButton.onclick = function() {
+                    addPoints(team);
+                };
+
+                teamEntry.appendChild(teamNameSpan);
+                teamEntry.appendChild(teamBar);
+                teamEntry.appendChild(addButton);
                 scoreboard.appendChild(teamEntry);
             }
         }
