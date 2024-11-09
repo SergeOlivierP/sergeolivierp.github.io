@@ -63,15 +63,18 @@
         }
         .team-bar {
             flex-grow: 1;
-            height: 20px;
-            background-color: #007bff;
-            border-radius: 5px;
+            font-size: 1.5em;
             margin-left: 10px;
-            transition: width 0.3s;
+            display: flex;
+            align-items: center;
         }
         .team-name {
-            width: 120px;
             font-weight: bold;
+            display: flex;
+            align-items: center;
+        }
+        .emoji {
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -108,12 +111,12 @@
         let currentQuestion = 0;
         let score = 0;
         let teams = {}; // Object to store teams and their scores
-        const maxBarWidth = 500; // Max width of the score bar in pixels
+        const emojis = ["😸", "🎉", "🚀", "🐉", "🌈", "🔥", "🍕", "🥳", "🦄", "👑", "💥", "🕶️", "🎈", "🦖"]; // Array of fun emojis
 
         // Function to load the TSV file and parse it into questions array
         async function loadQuestions() {
             try {
-                const response = await fetch('questions_sample.tsv'); // Path to your TSV file
+                const response = await fetch('questions.tsv'); // Path to your TSV file
                 const tsvData = await response.text();
                 parseTSV(tsvData);
                 loadQuestion();
@@ -196,7 +199,8 @@
             const teamNameInput = document.getElementById("teamNameInput");
             const teamName = teamNameInput.value.trim();
             if (teamName && !teams[teamName]) {
-                teams[teamName] = 0; // Initialize the team's score to 0
+                const emoji = emojis[Math.floor(Math.random() * emojis.length)];
+                teams[teamName] = { score: 0, emoji: emoji }; // Initialize the team's score and emoji
                 updateScoreboard();
                 teamNameInput.value = ''; // Clear the input
             } else {
@@ -209,17 +213,17 @@
             const scoreboard = document.getElementById("scoreboard");
             scoreboard.innerHTML = ''; // Clear the scoreboard
 
-            for (const [team, points] of Object.entries(teams)) {
+            for (const [team, { score, emoji }] of Object.entries(teams)) {
                 const teamEntry = document.createElement("div");
                 teamEntry.className = "team-entry";
 
                 const teamNameSpan = document.createElement("span");
                 teamNameSpan.className = "team-name";
-                teamNameSpan.textContent = team;
+                teamNameSpan.innerHTML = `<span class="emoji">${emoji}</span> ${team}`;
 
                 const teamBar = document.createElement("div");
                 teamBar.className = "team-bar";
-                teamBar.style.width = `${(points / Math.max(...Object.values(teams), 1)) * maxBarWidth}px`;
+                teamBar.innerHTML = emoji.repeat(score); // Stack of emojis for score
 
                 const addButton = document.createElement("button");
                 addButton.textContent = "+1 point";
@@ -237,10 +241,9 @@
         // Function to add points to a team
         function addPoints(team) {
             if (teams[team] !== undefined) {
-                teams[team] += 1; // Add one point to the selected team's score
+                teams[team].score += 1; // Add one point to the selected team's score
                 updateScoreboard();
             }
         }
-    </script>
-</body>
-</html>
+    </script
+
