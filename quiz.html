@@ -116,7 +116,7 @@
         // Function to load the TSV file and parse it into questions array
         async function loadQuestions() {
             try {
-                const response = await fetch('questions.tsv'); // Path to your TSV file
+                const response = await fetch('questions_sample.tsv'); // Path to your TSV file
                 const tsvData = await response.text();
                 parseTSV(tsvData);
                 loadQuestion();
