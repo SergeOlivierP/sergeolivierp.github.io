@@ -14,7 +14,7 @@
             background-color: #f4f4f9;
             color: #333;
         }
-        .quiz-container, .scoreboard-container {
+        .quiz-container, .scoreboard-container, .upload-container {
             max-width: 600px;
             margin: auto;
             padding: 20px;
@@ -82,12 +82,6 @@
     <div class="quiz-container">
         <h1>Quiz HAiAi.AI</h1>
         
-        <!-- File upload section -->
-        <div>
-            <input type="file" id="fileUpload" accept=".tsv" onchange="uploadQuestions(event)">
-            <label for="fileUpload">Téléchargez un fichier TSV de questions</label>
-        </div>
-        
         <div id="quiz" style="margin-top: 20px;">
             <div class="question-author" id="question-author">Auteur: </div>
             <div class="question" id="question">Question text will go here</div>
@@ -111,6 +105,22 @@
         <div class="scoreboard" id="scoreboard">
             <!-- Scoreboard entries will be dynamically generated here -->
         </div>
+    </div>
+
+    <!-- File upload section with instructions -->
+    <div class="upload-container">
+        <h2>Téléchargez vos questions</h2>
+        <p>Veuillez fournir un fichier TSV avec les colonnes suivantes, séparées par des tabulations :</p>
+        <ul style="text-align: left;">
+            <li><strong>Auteur</strong>: Nom de la personne ou de la source de la question.</li>
+            <li><strong>Question</strong>: Le texte de la question.</li>
+            <li><strong>Réponse</strong>: "Vrai" ou "Faux".</li>
+        </ul>
+        <p>Exemple de format de fichier TSV :</p>
+        <pre>John Doe	La mission de HAiAi.AI est de fournir des solutions d'intelligence artificielle avancées.	Vrai</pre>
+        
+        <input type="file" id="fileUpload" accept=".tsv" onchange="uploadQuestions(event)">
+        <label for="fileUpload">Sélectionnez un fichier TSV</label>
     </div>
 
     <script>
