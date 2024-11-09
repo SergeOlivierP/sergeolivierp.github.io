@@ -22,6 +22,11 @@
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
+        .question-author {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 5px;
+        }
         .question {
             font-size: 1.2em;
             margin-bottom: 15px;
@@ -52,6 +57,7 @@
     <div class="quiz-container">
         <h1>Quiz HAiAi.AI</h1>
         <div id="quiz">
+            <div class="question-author" id="question-author">Auteur: </div>
             <div class="question" id="question">Question text will go here</div>
             <ul class="options" id="options">
                 <!-- Options will be dynamically inserted here -->
@@ -66,43 +72,56 @@
     </div>
 
     <script>
-        const questions = [
-            {
-                question: "Quelle est la mission de HAiAi.AI?",
-                options: ["Fournir des solutions AI", "Vendre des logiciels", "Créer des applications mobiles"],
-                answer: 0
-            },
-            {
-                question: "Quel est le secteur d'expertise de HAiAi.AI?",
-                options: ["AI et stratégie d'entreprise", "E-commerce", "Construction"],
-                answer: 0
-            }
-        ];
-
+        let questions = [];
         let currentQuestion = 0;
         let score = 0;
 
+        // Function to load the TSV file and parse it into questions array
+        async function loadQuestions() {
+            try {
+                const response = await fetch('quizz.tsv'); // Path to your TSV file
+                const tsvData = await response.text();
+                parseTSV(tsvData);
+                loadQuestion();
+            } catch (error) {
+                console.error("Erreur lors du chargement des questions :", error);
+            }
+        }
+
+        // Function to parse the TSV data
+        function parseTSV(tsvData) {
+            const lines = tsvData.trim().split('\n');
+            questions = lines.map(line => {
+                const [author, question, answer] = line.split('\t');
+                return { author, question, answer };
+            });
+        }
+
+        // Function to load the current question
         function loadQuestion() {
             const questionElement = document.getElementById("question");
             const optionsElement = document.getElementById("options");
+            const authorElement = document.getElementById("question-author");
 
-            questionElement.innerText = questions[currentQuestion].question;
+            const current = questions[currentQuestion];
+            authorElement.innerText = `Auteur: ${current.author}`;
+            questionElement.innerText = current.question;
             optionsElement.innerHTML = "";
 
-            questions[currentQuestion].options.forEach((option, index) => {
+            // Generate simple "True/False" options as an example
+            ["Vrai", "Faux"].forEach((option, index) => {
                 const optionItem = document.createElement("li");
                 optionItem.innerHTML = `<input type="radio" name="option" value="${index}"> ${option}`;
                 optionsElement.appendChild(optionItem);
             });
         }
 
+        // Function to handle moving to the next question
         function nextQuestion() {
             const selectedOption = document.querySelector('input[name="option"]:checked');
             if (selectedOption) {
-                const answer = parseInt(selectedOption.value);
-                if (answer === questions[currentQuestion].answer) {
-                    score++;
-                }
+                const isCorrect = selectedOption.value === (questions[currentQuestion].answer.toLowerCase() === "vrai" ? "0" : "1");
+                if (isCorrect) score++;
                 currentQuestion++;
 
                 if (currentQuestion < questions.length) {
@@ -115,12 +134,14 @@
             }
         }
 
+        // Function to show the final result
         function showResult() {
             document.getElementById("quiz").style.display = "none";
             document.getElementById("result").style.display = "block";
             document.getElementById("score").innerText = `Votre score: ${score} / ${questions.length}`;
         }
 
+        // Function to restart the quiz
         function restartQuiz() {
             currentQuestion = 0;
             score = 0;
@@ -129,7 +150,9 @@
             loadQuestion();
         }
 
-        loadQuestion();
+        // Load the questions on page load
+        loadQuestions();
     </script>
 </body>
 </html>
+
