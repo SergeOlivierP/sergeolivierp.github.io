@@ -81,7 +81,14 @@
 <body>
     <div class="quiz-container">
         <h1>Quiz HAiAi.AI</h1>
-        <div id="quiz">
+        
+        <!-- File upload section -->
+        <div>
+            <input type="file" id="fileUpload" accept=".tsv" onchange="uploadQuestions(event)">
+            <label for="fileUpload">Téléchargez un fichier TSV de questions</label>
+        </div>
+        
+        <div id="quiz" style="margin-top: 20px;">
             <div class="question-author" id="question-author">Auteur: </div>
             <div class="question" id="question">Question text will go here</div>
             <div class="answer" id="answer">Answer will go here</div>
@@ -113,15 +120,17 @@
         let teams = {}; // Object to store teams and their scores
         const emojis = ["😸", "🎉", "🚀", "🐉", "🌈", "🔥", "🍕", "🥳", "🦄", "👑", "💥", "🕶️", "🎈", "🦖"]; // Array of fun emojis
 
-        // Function to load the TSV file and parse it into questions array
-        async function loadQuestions() {
-            try {
-                const response = await fetch('questions_sample.tsv'); // Path to your TSV file
-                const tsvData = await response.text();
-                parseTSV(tsvData);
-                loadQuestion();
-            } catch (error) {
-                console.error("Erreur lors du chargement des questions :", error);
+        // Function to handle file upload and parse TSV file
+        function uploadQuestions(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const tsvData = e.target.result;
+                    parseTSV(tsvData);
+                    loadQuestion();
+                };
+                reader.readAsText(file);
             }
         }
 
@@ -136,6 +145,10 @@
 
         // Function to load the current question
         function loadQuestion() {
+            if (questions.length === 0) {
+                alert("Aucune question n'est disponible. Veuillez télécharger un fichier TSV de questions.");
+                return;
+            }
             const questionElement = document.getElementById("question");
             const authorElement = document.getElementById("question-author");
             const answerElement = document.getElementById("answer");
@@ -191,9 +204,6 @@
             loadQuestion();
         }
 
-        // Load the questions on page load
-        loadQuestions();
-
         // Function to add a new team
         function addTeam() {
             const teamNameInput = document.getElementById("teamNameInput");
@@ -248,4 +258,3 @@
     </script>
 </body>
 </html>
-
